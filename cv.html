@@ -21,118 +21,8 @@
             <button class="filter-btn personal" data-filter="personal">Personal</button>
         </div>
 
-        <main class="timeline">
-            <div class="milestone education" data-category="education">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2020 - 2024</div>
-                    <h3 class="milestone-title">Bachelor's Degree in Computer Science</h3>
-                    <ul class="milestone-details">
-                        <li>Graduated with honors</li>
-                        <li>Specialized in Software Engineering</li>
-                        <li>GPA: 3.8/4.0</li>
-                        <li>Dean's List all semesters</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone work" data-category="work">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2023 - Present</div>
-                    <h3 class="milestone-title">Software Developer at Tech Corp</h3>
-                    <ul class="milestone-details">
-                        <li>Developed full-stack web applications</li>
-                        <li>Collaborated with cross-functional teams</li>
-                        <li>Implemented CI/CD pipelines</li>
-                        <li>Mentored junior developers</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone achievement" data-category="achievement">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2023</div>
-                    <h3 class="milestone-title">Open Source Contributor Award</h3>
-                    <ul class="milestone-details">
-                        <li>Contributed to 10+ major open-source projects</li>
-                        <li>Fixed critical bugs in popular libraries</li>
-                        <li>Implemented new features based on community requests</li>
-                        <li>Recognized by project maintainers</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone work" data-category="work">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2022 - 2023</div>
-                    <h3 class="milestone-title">Software Engineering Intern at StartupXYZ</h3>
-                    <ul class="milestone-details">
-                        <li>Built responsive web interfaces</li>
-                        <li>Optimized database queries for performance</li>
-                        <li>Participated in code reviews</li>
-                        <li>Implemented automated testing</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone education" data-category="education">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2018 - 2020</div>
-                    <h3 class="milestone-title">High School Diploma</h3>
-                    <ul class="milestone-details">
-                        <li>Valedictorian</li>
-                        <li>Captain of Robotics Club</li>
-                        <li>National Merit Scholar</li>
-                        <li>Perfect score in AP Computer Science</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone achievement" data-category="achievement">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2022</div>
-                    <h3 class="milestone-title">Hackathon Winner</h3>
-                    <ul class="milestone-details">
-                        <li>First place in regional hackathon</li>
-                        <li>Built AI-powered productivity tool</li>
-                        <li>Led team of 4 developers</li>
-                        <li>Presented to industry judges</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone personal" data-category="personal">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2021</div>
-                    <h3 class="milestone-title">Started Tech Blog</h3>
-                    <ul class="milestone-details">
-                        <li>Published 50+ technical articles</li>
-                        <li>10,000+ monthly readers</li>
-                        <li>Topics: Web development, AI, and DevOps</li>
-                        <li>Featured on tech news platforms</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="milestone personal" data-category="personal">
-                <div class="milestone-marker"></div>
-                <div class="milestone-content">
-                    <div class="milestone-time">2019</div>
-                    <h3 class="milestone-title">Built First Mobile App</h3>
-                    <ul class="milestone-details">
-                        <li>Created productivity app for students</li>
-                        <li>Published on app stores</li>
-                        <li>1,000+ downloads</li>
-                        <li>4.5-star rating</li>
-                    </ul>
-                </div>
-            </div>
+        <main class="timeline" id="timeline">
+            <!-- Timeline will be loaded dynamically from milestones.md -->
         </main>
 
         <nav>
@@ -141,36 +31,201 @@
     </div>
 
     <script>
-        // Filter functionality
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const milestones = document.querySelectorAll('.milestone');
+        // Fetch and parse milestones.md
+        async function loadMilestones() {
+            try {
+                const response = await fetch('milestones.md');
+                const markdown = await response.text();
+                const milestones = parseMarkdown(markdown);
+                renderTimeline(milestones);
+                setupFilters();
+            } catch (error) {
+                console.error('Error loading milestones:', error);
+                document.getElementById('timeline').innerHTML = '<p style="text-align: center; color: #e74c3c;">Failed to load timeline data.</p>';
+            }
+        }
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                button.classList.add('active');
+        // Parse markdown content into structured data
+        function parseMarkdown(markdown) {
+            const lines = markdown.split('\n');
+            const milestones = [];
+            let currentCategory = null;
+            let currentMilestone = null;
+            let parsingBulletPoints = false;
 
-                // Get filter value
-                const filter = button.getAttribute('data-filter');
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
 
-                // Filter milestones
-                milestones.forEach(milestone => {
-                    if (filter === 'all') {
-                        milestone.classList.remove('hidden');
-                    } else {
-                        const category = milestone.getAttribute('data-category');
-                        if (category === filter) {
+                // Parse category
+                if (line.startsWith('# Category :')) {
+                    currentCategory = line.split(':')[1].trim();
+                    continue;
+                }
+
+                // Parse title (## heading)
+                if (line.startsWith('## ')) {
+                    // Save previous milestone if exists
+                    if (currentMilestone) {
+                        milestones.push(currentMilestone);
+                    }
+                    // Start new milestone
+                    currentMilestone = {
+                        category: currentCategory,
+                        title: line.substring(3).trim(),
+                        timePeriod: '',
+                        bulletPoints: [],
+                        icon: ''
+                    };
+                    parsingBulletPoints = false;
+                    continue;
+                }
+
+                if (!currentMilestone) continue;
+
+                // Parse time period
+                if (line.startsWith('- Time period :')) {
+                    currentMilestone.timePeriod = line.split(':')[1].trim();
+                    continue;
+                }
+
+                // Start bullet points section
+                if (line === '- Bullet points') {
+                    parsingBulletPoints = true;
+                    continue;
+                }
+
+                // Parse icon
+                if (line.startsWith('- icon :')) {
+                    currentMilestone.icon = line.split(':')[1].trim();
+                    parsingBulletPoints = false;
+                    continue;
+                }
+
+                // Parse bullet points
+                if (parsingBulletPoints && line.startsWith('- ')) {
+                    currentMilestone.bulletPoints.push(line.substring(2).trim());
+                }
+            }
+
+            // Add last milestone
+            if (currentMilestone) {
+                milestones.push(currentMilestone);
+            }
+
+            // Sort milestones chronologically (most recent first)
+            return sortMilestones(milestones);
+        }
+
+        // Parse time period and create sortable date
+        function parseTimePeriod(timePeriod) {
+            // Handle "Present"
+            if (timePeriod.toLowerCase().includes('present')) {
+                return new Date().getTime();
+            }
+
+            // Extract end date (or single date) - split on " - " to handle ranges
+            const parts = timePeriod.split(' - ');
+            let dateStr = parts[parts.length - 1].trim();
+
+            // Parse YYYY or YYYY-MM format
+            const dateMatch = dateStr.match(/(\d{4})(?:-(\d{2}))?/);
+            if (dateMatch) {
+                const year = parseInt(dateMatch[1]);
+                const month = dateMatch[2] ? parseInt(dateMatch[2]) - 1 : 0;
+                return new Date(year, month).getTime();
+            }
+
+            return 0;
+        }
+
+        // Sort milestones by time period (most recent first)
+        function sortMilestones(milestones) {
+            return milestones.sort((a, b) => {
+                return parseTimePeriod(b.timePeriod) - parseTimePeriod(a.timePeriod);
+            });
+        }
+
+        // Render timeline with milestones
+        function renderTimeline(milestones) {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            milestones.forEach(milestone => {
+                const milestoneDiv = document.createElement('div');
+                milestoneDiv.className = `milestone ${milestone.category}`;
+                milestoneDiv.setAttribute('data-category', milestone.category);
+
+                const marker = document.createElement('div');
+                marker.className = 'milestone-marker';
+
+                const content = document.createElement('div');
+                content.className = 'milestone-content';
+
+                const time = document.createElement('div');
+                time.className = 'milestone-time';
+                time.textContent = milestone.timePeriod;
+
+                const title = document.createElement('h3');
+                title.className = 'milestone-title';
+                title.textContent = milestone.title;
+                if (milestone.icon) {
+                    title.textContent = `${milestone.icon} ${milestone.title}`;
+                }
+
+                const detailsList = document.createElement('ul');
+                detailsList.className = 'milestone-details';
+                milestone.bulletPoints.forEach(point => {
+                    const li = document.createElement('li');
+                    li.textContent = point;
+                    detailsList.appendChild(li);
+                });
+
+                content.appendChild(time);
+                content.appendChild(title);
+                content.appendChild(detailsList);
+
+                milestoneDiv.appendChild(marker);
+                milestoneDiv.appendChild(content);
+
+                timeline.appendChild(milestoneDiv);
+            });
+        }
+
+        // Setup filter functionality
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const milestones = document.querySelectorAll('.milestone');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    // Get filter value
+                    const filter = button.getAttribute('data-filter');
+
+                    // Filter milestones
+                    milestones.forEach(milestone => {
+                        if (filter === 'all') {
                             milestone.classList.remove('hidden');
                         } else {
-                            milestone.classList.add('hidden');
+                            const category = milestone.getAttribute('data-category');
+                            if (category === filter) {
+                                milestone.classList.remove('hidden');
+                            } else {
+                                milestone.classList.add('hidden');
+                            }
                         }
-                    }
+                    });
                 });
             });
-        });
+        }
+
+        // Load milestones when page loads
+        document.addEventListener('DOMContentLoaded', loadMilestones);
     </script>
 </body>
 </html>
