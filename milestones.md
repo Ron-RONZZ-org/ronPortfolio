@@ -1,87 +1,62 @@
 # Category : personal
 
-## Built First Mobile App
+## Developed First App : WENG
 
-- Time period : 2019
+- Time period : 2020
 - Bullet points
-  - Created productivity app for students
-  - Published on app stores
-  - 1,000+ downloads
-  - 4.5-star rating
+  - Quiz app to enhance student revision experience
+  - Adoption by multiple class teacher
 - icon : 📱
 
-## Started Tech Blog
+## Started Ronzz.org
 
-- Time period : 2021
+- Time period : 2024
 - Bullet points
-  - Published 50+ technical articles
-  - 10,000+ monthly readers
-  - Topics: Web development, AI, and DevOps
-  - Featured on tech news platforms
 - icon : ✍️
 
 # Category : education
 
-## High School Diploma
-
-- Time period : 2018 - 2020
-- Bullet points
-  - Valedictorian
-  - Captain of Robotics Club
-  - National Merit Scholar
-  - Perfect score in AP Computer Science
-- icon : 📚
-
-## Bachelor's Degree in Computer Science
-
-- Time period : 2020 - 2024
-- Bullet points
-  - Graduated with honors
-  - Specialized in Software Engineering
-  - GPA: 3.8/4.0
-  - Dean's List all semesters
-- icon : 🎓
-
-# Category : achievement
-
-## Hackathon Winner
-
-- Time period : 2022
-- Bullet points
-  - First place in regional hackathon
-  - Built AI-powered productivity tool
-  - Led team of 4 developers
-  - Presented to industry judges
-- icon : 🥇
-
-## Open Source Contributor Award
+## General Certificate of Education, Advanced level (UK A-levels)
 
 - Time period : 2023
 - Bullet points
-  - Contributed to 10+ major open-source projects
-  - Fixed critical bugs in popular libraries
-  - Implemented new features based on community requests
-  - Recognized by project maintainers
-- icon : 🏆
+  - Grade AAA* (Further Math-Math-Physics)
+
+## Certificate of Higher Education in Engineering Science @ UCL
+
+- Time period : 2023 - 2024
+- Bullet points
+  - Upper second-class: average 60%
+  - Specialization in Geoinformation Systems
+  - Faculty student representative
+- Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
+
+## BUT Génie Industriel et Maintenance @ [Univ-Lorraine](https://www.univ-lorraine.fr/)
+
+- Time period : 2025-present
+- Bullet points
+  - Specialization : methods and digitalization
+# Category : achievement
+
+## Guangxi Provincial Excellence Award in Techonology
+
+- Time period : 2020
+- Bullet points
+  
+## La Maison d'Étudiant Épinal : Student of the month
+
+- Time period : 2025
 
 # Category : work
 
-## Software Engineering Intern at StartupXYZ
+## Student representative for the faculty of Engineering Science  @ UCL 
 
-- Time period : 2022 - 2023
+- Time period : 2023 - 2024
 - Bullet points
-  - Built responsive web interfaces
-  - Optimized database queries for performance
-  - Participated in code reviews
-  - Implemented automated testing
-- icon : 💻
+- Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
 
-## Software Developer at Tech Corp
 
-- Time period : 2023 - Present
+## Academic board member, voting @ UCL
+
+- Time period : 2023 - 2024
 - Bullet points
-  - Developed full-stack web applications
-  - Collaborated with cross-functional teams
-  - Implemented CI/CD pipelines
-  - Mentored junior developers
-- icon : 💼
