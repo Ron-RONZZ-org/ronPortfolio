@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV & Timeline - Ron's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Journey</h1>
+            <p class="bio">A timeline of my education, work experience, achievements, and personal milestones.</p>
+        </header>
+
+        <div class="filter-buttons">
+            <button class="filter-btn all active" data-filter="all">All</button>
+            <button class="filter-btn education" data-filter="education">Education</button>
+            <button class="filter-btn work" data-filter="work">Work</button>
+            <button class="filter-btn achievement" data-filter="achievement">Achievements</button>
+            <button class="filter-btn personal" data-filter="personal">Personal</button>
+        </div>
+
+        <main class="timeline">
+            <div class="milestone education" data-category="education">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2020 - 2024</div>
+                    <h3 class="milestone-title">Bachelor's Degree in Computer Science</h3>
+                    <ul class="milestone-details">
+                        <li>Graduated with honors</li>
+                        <li>Specialized in Software Engineering</li>
+                        <li>GPA: 3.8/4.0</li>
+                        <li>Dean's List all semesters</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone work" data-category="work">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2023 - Present</div>
+                    <h3 class="milestone-title">Software Developer at Tech Corp</h3>
+                    <ul class="milestone-details">
+                        <li>Developed full-stack web applications</li>
+                        <li>Collaborated with cross-functional teams</li>
+                        <li>Implemented CI/CD pipelines</li>
+                        <li>Mentored junior developers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone achievement" data-category="achievement">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2023</div>
+                    <h3 class="milestone-title">Open Source Contributor Award</h3>
+                    <ul class="milestone-details">
+                        <li>Contributed to 10+ major open-source projects</li>
+                        <li>Fixed critical bugs in popular libraries</li>
+                        <li>Implemented new features based on community requests</li>
+                        <li>Recognized by project maintainers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone work" data-category="work">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2022 - 2023</div>
+                    <h3 class="milestone-title">Software Engineering Intern at StartupXYZ</h3>
+                    <ul class="milestone-details">
+                        <li>Built responsive web interfaces</li>
+                        <li>Optimized database queries for performance</li>
+                        <li>Participated in code reviews</li>
+                        <li>Implemented automated testing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone education" data-category="education">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2018 - 2020</div>
+                    <h3 class="milestone-title">High School Diploma</h3>
+                    <ul class="milestone-details">
+                        <li>Valedictorian</li>
+                        <li>Captain of Robotics Club</li>
+                        <li>National Merit Scholar</li>
+                        <li>Perfect score in AP Computer Science</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone achievement" data-category="achievement">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2022</div>
+                    <h3 class="milestone-title">Hackathon Winner</h3>
+                    <ul class="milestone-details">
+                        <li>First place in regional hackathon</li>
+                        <li>Built AI-powered productivity tool</li>
+                        <li>Led team of 4 developers</li>
+                        <li>Presented to industry judges</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone personal" data-category="personal">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2021</div>
+                    <h3 class="milestone-title">Started Tech Blog</h3>
+                    <ul class="milestone-details">
+                        <li>Published 50+ technical articles</li>
+                        <li>10,000+ monthly readers</li>
+                        <li>Topics: Web development, AI, and DevOps</li>
+                        <li>Featured on tech news platforms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="milestone personal" data-category="personal">
+                <div class="milestone-marker"></div>
+                <div class="milestone-content">
+                    <div class="milestone-time">2019</div>
+                    <h3 class="milestone-title">Built First Mobile App</h3>
+                    <ul class="milestone-details">
+                        <li>Created productivity app for students</li>
+                        <li>Published on app stores</li>
+                        <li>1,000+ downloads</li>
+                        <li>4.5-star rating</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <nav>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </nav>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const milestones = document.querySelectorAll('.milestone');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                // Get filter value
+                const filter = button.getAttribute('data-filter');
+
+                // Filter milestones
+                milestones.forEach(milestone => {
+                    if (filter === 'all') {
+                        milestone.classList.remove('hidden');
+                    } else {
+                        const category = milestone.getAttribute('data-category');
+                        if (category === filter) {
+                            milestone.classList.remove('hidden');
+                        } else {
+                            milestone.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
