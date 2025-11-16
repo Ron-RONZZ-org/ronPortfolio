@@ -1,15 +1,15 @@
 :root {
-    --primary-color: #2c3e50;
+    --primary-color: #a8b2bd;
     --secondary-color: #3498db;
     --accent-color: #e74c3c;
-    --bg-color: #ecf0f1;
-    --text-color: #2c3e50;
-    --card-bg: #ffffff;
+    --bg-color: #2c3842;
+    --text-color: #e8eaed;
+    --card-bg: #1e2529;
     --education-color: #3498db;
     --work-color: #2ecc71;
     --achievement-color: #f39c12;
     --personal-color: #9b59b6;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -50,12 +50,12 @@ header {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .bio {
     font-size: 1.1rem;
-    color: #7f8c8d;
+    color: #9ca3af;
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
@@ -85,7 +85,7 @@ h1 {
 
 .link-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .link-icon {
@@ -130,7 +130,7 @@ h1 {
 }
 
 .filter-btn.all {
-    background-color: var(--primary-color);
+    background-color: #3d4f5c;
     color: white;
 }
 
@@ -227,7 +227,7 @@ h1 {
 
 .milestone-time {
     font-size: 0.9rem;
-    color: #7f8c8d;
+    color: #9ca3af;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -236,7 +236,7 @@ h1 {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: var(--primary-color);
+    color: var(--text-color);
     padding-right: 100px; /* Make room for logo */
 }
 
@@ -256,7 +256,7 @@ h1 {
 
 .milestone-details li {
     margin-bottom: 0.5rem;
-    color: #555;
+    color: #c1c7cd;
 }
 
 .milestone-details a {
@@ -281,7 +281,7 @@ h1 {
 .contact-card h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .contact-item {
@@ -307,7 +307,7 @@ h1 {
 
 .contact-label {
     font-size: 0.85rem;
-    color: #7f8c8d;
+    color: #9ca3af;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -345,7 +345,7 @@ nav {
 }
 
 .back-link:hover {
-    background: var(--primary-color);
+    background: #2980b9;
     transform: translateY(-2px);
 }
 
