@@ -13,19 +13,22 @@
 
 - Time period : 2024
 - Bullet points
-  - Écriture sur
+  - J'écris sur
     - la technologie
-    - ma vie quotidienne
+    - la vie
     - et le monde
 - Icon : ✍️
 - Logo : https://ronzz.org/content/images/2025/02/tp_Ronzz.org_logo.png
 
 # Category : education
 
-## General Certificate of Education, Advanced level (UK A-levels)
+## British General Certificate of Education, Advanced level (équivalent : Baccalauréat Général français)
 
 - Time period : 2023
 - Bullet points
+  - Mention très bien avec félicitations de jury
+  - Spécialisation Mathématiques et Science Naturelle
+  - option Mathématiques expertes
   - Note AAA* (Mathématiques avancées-Mathématiques-Physique)
 - Logo : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd8lQdcnsu8SFVkfAHpypYBEKrwGFi3nWcFQ&s
 
@@ -33,7 +36,8 @@
 
 - Time period : 2023 - 2024
 - Bullet points
-  - Mention bien : moyenne de 60%
+  - Mention bien
+  - moyenne : 60%
   - Spécialisation en systèmes d'information géographique
   - Représentant étudiant de la faculté
 - Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
@@ -77,5 +81,6 @@
 ## Membre du conseil académique, avec droit de vote @ UCL
 
 - Time period : 2023 - 2024
+- En tant que représentant étudiant élu
 - Bullet points
 - Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
