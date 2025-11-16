@@ -5,7 +5,7 @@
 - Time period : 2020
 - Bullet points
   - 帮助学生提升复习体验的测验应用
-  - 被多位班级教师采用
+  - 被多位教师采用
 - Icon : 📱
 - Logo : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRwBC1EWTHm9QLGEaBDc1leFU5jZBglg_rig&s
 
@@ -13,10 +13,10 @@
 
 - Time period : 2024
 - Bullet points
-  - 撰写关于
+  - 我写
     - 技术
     - 我的日常生活
-    - 和世界的文章
+    - 世界
 - Icon : ✍️
 - Logo : https://ronzz.org/content/images/2025/02/tp_Ronzz.org_logo.png
 
@@ -34,7 +34,7 @@
 - Time period : 2023 - 2024
 - Bullet points
   - 二等一学位：平均分60%
-  - 地理信息系统专业
+  - 地理信息系统方向
   - 学院学生代表
 - Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
 
@@ -74,7 +74,7 @@
 - Bullet points
 - Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
 
-## UCL学术委员会成员，有投票权
+## UCL学术委员会成员
 
 - Time period : 2023 - 2024
 - Bullet points
