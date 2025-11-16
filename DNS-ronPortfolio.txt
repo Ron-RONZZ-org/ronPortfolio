@@ -1,0 +1,22 @@
+; DNS Records for rongzhou.me - GitHub Pages Configuration
+; BIND format
+
+; A Records for GitHub Pages (apex domain)
+rongzhou.me. 3600 IN A 185.199.108.153
+rongzhou.me. 3600 IN A 185.199.109.153
+rongzhou.me. 3600 IN A 185.199.110.153
+rongzhou.me. 3600 IN A 185.199.111.153
+
+; AAAA Records for GitHub Pages (IPv6 support)
+rongzhou.me. 3600 IN AAAA 2606:50c0:8000::153
+rongzhou.me. 3600 IN AAAA 2606:50c0:8001::153
+rongzhou.me. 3600 IN AAAA 2606:50c0:8002::153
+rongzhou.me. 3600 IN AAAA 2606:50c0:8003::153
+
+; WWW subdomain (alternative method using CNAME)
+; Uncomment if you want www.rongzhou.me to also work:
+; www.rongzhou.me. 3600 IN CNAME ron-ronzz-org.github.io.
+
+; Mail Exchange Records (example format as requested)
+; Add your actual MX records here if needed:
+; rongzhou.me. 3000 IN MX 20 aspmx2.migadu.com.
