@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV & Timeline - Ron's Portfolio</title>
+    <title data-i18n="page_title_cv">CV & Timeline - Ron's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>My Journey</h1>
-            <p class="bio">A timeline of my education, work experience, achievements, and personal mileStone.</p>
+            <h1 data-i18n="my_journey">My Journey</h1>
+            <p class="bio" data-i18n="journey_bio">A timeline of my education, work experience, achievements, and personal mileStone.</p>
         </header>
 
         <div class="filter-buttons">
-            <button class="filter-btn all active" data-filter="all">All</button>
-            <button class="filter-btn education" data-filter="education">Education</button>
-            <button class="filter-btn work" data-filter="work">Work</button>
-            <button class="filter-btn achievement" data-filter="achievement">Achievements</button>
-            <button class="filter-btn personal" data-filter="personal">Personal</button>
+            <button class="filter-btn all active" data-filter="all" data-i18n="filter_all">All</button>
+            <button class="filter-btn education" data-filter="education" data-i18n="filter_education">Education</button>
+            <button class="filter-btn work" data-filter="work" data-i18n="filter_work">Work</button>
+            <button class="filter-btn achievement" data-filter="achievement" data-i18n="filter_achievement">Achievements</button>
+            <button class="filter-btn personal" data-filter="personal" data-i18n="filter_personal">Personal</button>
         </div>
 
         <main class="timeline" id="timeline">
@@ -26,10 +26,11 @@
         </main>
 
         <nav>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link" data-i18n="back_to_home">← Back to Home</a>
         </nav>
     </div>
 
+    <script src="js/i18n.js"></script>
     <script src="js/cv.js"></script>
 </body>
 </html>

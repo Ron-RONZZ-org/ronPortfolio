@@ -1,7 +1,21 @@
+// Get milestone file path based on current language
+function getMilestoneFilePath() {
+    const lang = window.i18n ? window.i18n.getCurrentLanguage() : 'en';
+    
+    if (lang === 'fr') {
+        return 'fr/mileStone-FR.md';
+    } else if (lang === 'zh') {
+        return 'zh/mileStone-ZH.md';
+    } else {
+        return 'mileStone.md';
+    }
+}
+
 // Fetch and parse mileStone.md
 async function loadMilestones() {
     try {
-        const response = await fetch('mileStone.md');
+        const filePath = getMilestoneFilePath();
+        const response = await fetch(filePath);
         const markdown = await response.text();
         const mileStone = parseMarkdown(markdown);
         renderTimeline(mileStone);
@@ -304,3 +318,6 @@ function setupFilters() {
 
 // Load mileStone when page loads
 document.addEventListener('DOMContentLoaded', loadMilestones);
+
+// Reload milestones when language changes
+window.addEventListener('languageChanged', loadMilestones);
