@@ -18,7 +18,7 @@ This is a personal portfolio website for Ron, designed as a linktree-style landi
 ├── js/
 │   └── cv.js         # JavaScript for CV timeline parsing and rendering
 ├── img/              # Image assets
-└── milestones.md     # Markdown file containing CV data
+└── mileStone.md     # Markdown file containing CV data
 ```
 
 ## Coding Standards
@@ -47,7 +47,7 @@ This is a personal portfolio website for Ron, designed as a linktree-style landi
 - Add comments for complex logic
 
 ## Data Format
-The `milestones.md` file uses a specific markdown format:
+The `mileStone.md` file uses a specific markdown format:
 ```markdown
 # Category : [category-name]
 
@@ -78,13 +78,13 @@ Categories: `personal`, `education`, `work`, `achievement`
 4. Preserve accessibility features
 
 ### When Updating Content
-1. For CV updates, modify `milestones.md` following the established format
+1. For CV updates, modify `mileStone.md` following the established format
 2. For link updates, modify the relevant HTML files
 3. Ensure all links open external sites with `target="_blank" rel="noopener"`
 
 ### When Fixing Bugs
 1. Test the fix on all three HTML pages
-2. Ensure backward compatibility with existing data in `milestones.md`
+2. Ensure backward compatibility with existing data in `mileStone.md`
 3. Maintain error handling in JavaScript
 
 ## Performance Considerations
@@ -101,7 +101,7 @@ Categories: `personal`, `education`, `work`, `achievement`
 ## Common Tasks
 
 ### Adding a New Milestone
-Edit `milestones.md` and add the milestone under the appropriate category following the format above.
+Edit `mileStone.md` and add the milestone under the appropriate category following the format above.
 
 ### Adding a New Link to Landing Page
 Edit `index.html` and add a new `.link-card` element in the `.links-container`.

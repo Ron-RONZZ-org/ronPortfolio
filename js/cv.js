@@ -1,13 +1,13 @@
-// Fetch and parse milestones.md
+// Fetch and parse mileStone.md
 async function loadMilestones() {
     try {
-        const response = await fetch('milestones.md');
+        const response = await fetch('mileStone.md');
         const markdown = await response.text();
-        const milestones = parseMarkdown(markdown);
-        renderTimeline(milestones);
+        const mileStone = parseMarkdown(markdown);
+        renderTimeline(mileStone);
         setupFilters();
     } catch (error) {
-        console.error('Error loading milestones:', error);
+        console.error('Error loading mileStone:', error);
         document.getElementById('timeline').innerHTML = '<p style="text-align: center; color: #e74c3c;">Failed to load timeline data.</p>';
     }
 }
@@ -15,7 +15,7 @@ async function loadMilestones() {
 // Parse markdown content into structured data
 function parseMarkdown(markdown) {
     const lines = markdown.split('\n');
-    const milestones = [];
+    const mileStone = [];
     let currentCategory = null;
     let currentMilestone = null;
     let parsingBulletPoints = false;
@@ -33,7 +33,7 @@ function parseMarkdown(markdown) {
         if (line.startsWith('## ')) {
             // Save previous milestone if exists
             if (currentMilestone) {
-                milestones.push(currentMilestone);
+                mileStone.push(currentMilestone);
             }
             // Start new milestone
             currentMilestone = {
@@ -51,26 +51,26 @@ function parseMarkdown(markdown) {
         if (!currentMilestone) continue;
 
         // Parse time period
-        if (line.startsWith('- Time period :')) {
+        if (line.toLowerCase().startsWith('- time period :')) {
             currentMilestone.timePeriod = line.split(':')[1].trim();
             continue;
         }
 
         // Start bullet points section
-        if (line === '- Bullet points') {
+        if (line.toLowerCase() === '- bullet points') {
             parsingBulletPoints = true;
             continue;
         }
 
-        // Parse icon
-        if (line.startsWith('- icon :')) {
+        // Parse icon (case insensitive)
+        if (line.toLowerCase().startsWith('- icon :')) {
             currentMilestone.icon = line.split(':')[1].trim();
             parsingBulletPoints = false;
             continue;
         }
 
-        // Parse logo
-        if (line.startsWith('- Logo :')) {
+        // Parse logo (case insensitive)
+        if (line.toLowerCase().startsWith('- logo :')) {
             currentMilestone.logo = line.split(':').slice(1).join(':').trim();
             parsingBulletPoints = false;
             continue;
@@ -84,11 +84,11 @@ function parseMarkdown(markdown) {
 
     // Add last milestone
     if (currentMilestone) {
-        milestones.push(currentMilestone);
+        mileStone.push(currentMilestone);
     }
 
-    // Sort milestones chronologically (most recent first)
-    return sortMilestones(milestones);
+    // Sort mileStone chronologically (most recent first)
+    return sortMilestones(mileStone);
 }
 
 // Parse time period and create sortable date
@@ -113,9 +113,9 @@ function parseTimePeriod(timePeriod) {
     return 0;
 }
 
-// Sort milestones by time period (most recent first)
-function sortMilestones(milestones) {
-    return milestones.sort((a, b) => {
+// Sort mileStone by time period (most recent first)
+function sortMilestones(mileStone) {
+    return mileStone.sort((a, b) => {
         return parseTimePeriod(b.timePeriod) - parseTimePeriod(a.timePeriod);
     });
 }
@@ -131,12 +131,12 @@ function parseLinks(text) {
     return text;
 }
 
-// Render timeline with milestones
-function renderTimeline(milestones) {
+// Render timeline with mileStone
+function renderTimeline(mileStone) {
     const timeline = document.getElementById('timeline');
     timeline.innerHTML = '';
 
-    milestones.forEach(milestone => {
+    mileStone.forEach(milestone => {
         const milestoneDiv = document.createElement('div');
         milestoneDiv.className = `milestone ${milestone.category}`;
         milestoneDiv.setAttribute('data-category', milestone.category);
@@ -197,7 +197,7 @@ function renderTimeline(milestones) {
 // Setup filter functionality
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const milestones = document.querySelectorAll('.milestone');
+    const mileStone = document.querySelectorAll('.milestone');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -210,8 +210,8 @@ function setupFilters() {
             // Get filter value
             const filter = button.getAttribute('data-filter');
 
-            // Filter milestones
-            milestones.forEach(milestone => {
+            // Filter mileStone
+            mileStone.forEach(milestone => {
                 if (filter === 'all') {
                     milestone.classList.remove('hidden');
                 } else {
@@ -227,5 +227,5 @@ function setupFilters() {
     });
 }
 
-// Load milestones when page loads
+// Load mileStone when page loads
 document.addEventListener('DOMContentLoaded', loadMilestones);
