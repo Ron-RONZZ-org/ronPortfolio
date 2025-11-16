@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Ron's Portfolio</title>
+    <title data-i18n="page_title_contact">Contact - Ron's Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Get In Touch</h1>
-            <p class="bio">Feel free to email me. I'm always happy to connect!</p>
+            <h1 data-i18n="get_in_touch">Get In Touch</h1>
+            <p class="bio" data-i18n="contact_bio">Feel free to email me. I'm always happy to connect!</p>
         </header>
 
         <main>
             <div class="contact-card">
-                <h2>Contact Information</h2>
+                <h2 data-i18n="contact_information">Contact Information</h2>
                 
                 <div class="contact-item">
                     <span class="contact-icon">📧</span>
                     <div class="contact-info">
-                        <div class="contact-label">Email</div>
+                        <div class="contact-label" data-i18n="email">Email</div>
                         <div class="contact-value"><a href="mailto:hi@rongzhou.me">hi@rongzhou.me</a></div>
                     </div>
                 </div>
@@ -28,15 +28,15 @@
                 <div class="contact-item">
                     <span class="contact-icon">📍</span>
                     <div class="contact-info">
-                        <div class="contact-label">Location</div>
-                        <div class="contact-value">🇫🇷France, 🇪🇺The European Union</div>
+                        <div class="contact-label" data-i18n="location">Location</div>
+                        <div class="contact-value" data-i18n="location_value">🇫🇷France, 🇪🇺The European Union</div>
                     </div>
                 </div>
 
                 <div class="contact-item">
                     <span class="contact-icon">🎓</span>
                     <div class="contact-info">
-                        <div class="contact-label">Organization</div>
+                        <div class="contact-label" data-i18n="organization">Organization</div>
                         <div class="contact-value">Université de Lorraine</div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="contact-item">
                     <span class="contact-icon">💻</span>
                     <div class="contact-info">
-                        <div class="contact-label">Adress</div>
+                        <div class="contact-label" data-i18n="address">Adress</div>
                         <div class="contact-value">Université de Lorraine – IUT Épinal Hubert Curien <br>7 rue des Fusillés de la Résistance<br>
 88000 ÉPINAL France
 </div>
@@ -55,8 +55,9 @@
         </main>
 
         <nav>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link" data-i18n="back_to_home">← Back to Home</a>
         </nav>
     </div>
+    <script src="js/i18n.js"></script>
 </body>
 </html>
