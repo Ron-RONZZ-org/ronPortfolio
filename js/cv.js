@@ -21,16 +21,17 @@ function parseMarkdown(markdown) {
     let parsingBulletPoints = false;
 
     for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
+        const line = lines[i];
+        const trimmedLine = line.trim();
 
         // Parse category
-        if (line.startsWith('# Category :')) {
-            currentCategory = line.split(':')[1].trim();
+        if (trimmedLine.startsWith('# Category :')) {
+            currentCategory = trimmedLine.split(':')[1].trim();
             continue;
         }
 
         // Parse title (## heading)
-        if (line.startsWith('## ')) {
+        if (trimmedLine.startsWith('## ')) {
             // Save previous milestone if exists
             if (currentMilestone) {
                 mileStone.push(currentMilestone);
@@ -38,7 +39,7 @@ function parseMarkdown(markdown) {
             // Start new milestone
             currentMilestone = {
                 category: currentCategory,
-                title: line.substring(3).trim(),
+                title: trimmedLine.substring(3).trim(),
                 timePeriod: '',
                 bulletPoints: [],
                 icon: '',
@@ -51,34 +52,41 @@ function parseMarkdown(markdown) {
         if (!currentMilestone) continue;
 
         // Parse time period
-        if (line.toLowerCase().startsWith('- time period :')) {
-            currentMilestone.timePeriod = line.split(':')[1].trim();
+        if (trimmedLine.toLowerCase().startsWith('- time period :')) {
+            currentMilestone.timePeriod = trimmedLine.split(':')[1].trim();
             continue;
         }
 
         // Start bullet points section
-        if (line.toLowerCase() === '- bullet points') {
+        if (trimmedLine.toLowerCase() === '- bullet points') {
             parsingBulletPoints = true;
             continue;
         }
 
         // Parse icon (case insensitive)
-        if (line.toLowerCase().startsWith('- icon :')) {
-            currentMilestone.icon = line.split(':')[1].trim();
+        if (trimmedLine.toLowerCase().startsWith('- icon :')) {
+            currentMilestone.icon = trimmedLine.split(':')[1].trim();
             parsingBulletPoints = false;
             continue;
         }
 
         // Parse logo (case insensitive)
-        if (line.toLowerCase().startsWith('- logo :')) {
-            currentMilestone.logo = line.split(':').slice(1).join(':').trim();
+        if (trimmedLine.toLowerCase().startsWith('- logo :')) {
+            currentMilestone.logo = trimmedLine.split(':').slice(1).join(':').trim();
             parsingBulletPoints = false;
             continue;
         }
 
-        // Parse bullet points
-        if (parsingBulletPoints && line.startsWith('- ')) {
-            currentMilestone.bulletPoints.push(line.substring(2).trim());
+        // Parse bullet points (including multi-level)
+        if (parsingBulletPoints && trimmedLine.startsWith('- ')) {
+            // Calculate indentation level (count leading spaces before the dash)
+            const leadingSpaces = line.search(/\S/);
+            const indentLevel = Math.floor(leadingSpaces / 2); // Assuming 2 spaces per indent level
+            
+            currentMilestone.bulletPoints.push({
+                text: trimmedLine.substring(2).trim(),
+                level: indentLevel
+            });
         }
     }
 
@@ -131,6 +139,17 @@ function parseLinks(text) {
     return text;
 }
 
+// Get default icon for category
+function getDefaultIcon(category) {
+    const defaultIcons = {
+        'work': '💼',
+        'education': '🎓',
+        'achievement': '🥇',
+        'personal': '🎉'
+    };
+    return defaultIcons[category] || '';
+}
+
 // Render timeline with mileStone
 function renderTimeline(mileStone) {
     const timeline = document.getElementById('timeline');
@@ -155,24 +174,25 @@ function renderTimeline(mileStone) {
         title.className = 'milestone-title';
         // Parse links in title
         const parsedTitle = parseLinks(milestone.title);
-        if (milestone.icon) {
-            title.innerHTML = `${milestone.icon} ${parsedTitle}`;
+        // Use provided icon or default icon based on category
+        const icon = milestone.icon || getDefaultIcon(milestone.category);
+        if (icon) {
+            title.innerHTML = `${icon} ${parsedTitle}`;
         } else {
             title.innerHTML = parsedTitle;
         }
 
         const detailsList = document.createElement('ul');
         detailsList.className = 'milestone-details';
-        milestone.bulletPoints.forEach(point => {
-            const li = document.createElement('li');
-            // Parse links in bullet points
-            li.innerHTML = parseLinks(point);
-            detailsList.appendChild(li);
-        });
+        
+        // Render bullet points with proper nesting
+        renderBulletPoints(milestone.bulletPoints, detailsList);
 
         content.appendChild(time);
         content.appendChild(title);
-        content.appendChild(detailsList);
+        if (milestone.bulletPoints.length > 0) {
+            content.appendChild(detailsList);
+        }
 
         // Add logo if present
         if (milestone.logo) {
@@ -192,6 +212,61 @@ function renderTimeline(mileStone) {
 
         timeline.appendChild(milestoneDiv);
     });
+}
+
+// Render bullet points with proper nesting
+function renderBulletPoints(bulletPoints, parentElement) {
+    if (!bulletPoints || bulletPoints.length === 0) return;
+    
+    // Normalize levels - find minimum level and subtract it from all
+    let minLevel = Infinity;
+    bulletPoints.forEach(point => {
+        const level = point.level !== undefined ? point.level : 0;
+        minLevel = Math.min(minLevel, level);
+    });
+    
+    const normalizedPoints = bulletPoints.map(point => ({
+        text: point.text || point,
+        level: (point.level !== undefined ? point.level : 0) - minLevel
+    }));
+    
+    // Build nested list
+    buildNestedList(normalizedPoints, parentElement, 0, 0);
+}
+
+// Helper function to build nested lists recursively
+function buildNestedList(points, parentElement, startIndex, currentLevel) {
+    let i = startIndex;
+    
+    while (i < points.length) {
+        const point = points[i];
+        
+        if (point.level < currentLevel) {
+            // Return to parent level
+            return i;
+        }
+        
+        if (point.level === currentLevel) {
+            // Create list item at current level
+            const li = document.createElement('li');
+            li.innerHTML = parseLinks(point.text);
+            parentElement.appendChild(li);
+            
+            // Check if next item is a child (deeper level)
+            if (i + 1 < points.length && points[i + 1].level > currentLevel) {
+                // Create nested ul
+                const nestedUl = document.createElement('ul');
+                li.appendChild(nestedUl);
+                // Recursively build nested list
+                i = buildNestedList(points, nestedUl, i + 1, currentLevel + 1);
+                continue;
+            }
+        }
+        
+        i++;
+    }
+    
+    return i;
 }
 
 // Setup filter functionality
