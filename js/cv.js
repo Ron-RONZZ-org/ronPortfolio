@@ -41,7 +41,8 @@ function parseMarkdown(markdown) {
                 title: line.substring(3).trim(),
                 timePeriod: '',
                 bulletPoints: [],
-                icon: ''
+                icon: '',
+                logo: ''
             };
             parsingBulletPoints = false;
             continue;
@@ -64,6 +65,13 @@ function parseMarkdown(markdown) {
         // Parse icon
         if (line.startsWith('- icon :')) {
             currentMilestone.icon = line.split(':')[1].trim();
+            parsingBulletPoints = false;
+            continue;
+        }
+
+        // Parse logo
+        if (line.startsWith('- Logo :')) {
+            currentMilestone.logo = line.split(':').slice(1).join(':').trim();
             parsingBulletPoints = false;
             continue;
         }
@@ -112,6 +120,17 @@ function sortMilestones(milestones) {
     });
 }
 
+// Parse markdown-style links [text](url) and HTML links <a href="url">text</a> to HTML
+function parseLinks(text) {
+    // First, handle HTML anchor tags: <a href="url">text</a>
+    text = text.replace(/<a\s+href="([^"]+)">([^<]+)<\/a>/g, '<a href="$1" target="_blank" rel="noopener">$2</a>');
+    
+    // Then, handle markdown-style links: [text](url)
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    
+    return text;
+}
+
 // Render timeline with milestones
 function renderTimeline(milestones) {
     const timeline = document.getElementById('timeline');
@@ -134,22 +153,39 @@ function renderTimeline(milestones) {
 
         const title = document.createElement('h3');
         title.className = 'milestone-title';
-        title.textContent = milestone.title;
+        // Parse links in title
+        const parsedTitle = parseLinks(milestone.title);
         if (milestone.icon) {
-            title.textContent = `${milestone.icon} ${milestone.title}`;
+            title.innerHTML = `${milestone.icon} ${parsedTitle}`;
+        } else {
+            title.innerHTML = parsedTitle;
         }
 
         const detailsList = document.createElement('ul');
         detailsList.className = 'milestone-details';
         milestone.bulletPoints.forEach(point => {
             const li = document.createElement('li');
-            li.textContent = point;
+            // Parse links in bullet points
+            li.innerHTML = parseLinks(point);
             detailsList.appendChild(li);
         });
 
         content.appendChild(time);
         content.appendChild(title);
         content.appendChild(detailsList);
+
+        // Add logo if present
+        if (milestone.logo) {
+            const logoImg = document.createElement('img');
+            logoImg.className = 'milestone-logo';
+            logoImg.src = milestone.logo;
+            logoImg.alt = 'Logo';
+            logoImg.onerror = function() {
+                // Hide image if it fails to load
+                this.style.display = 'none';
+            };
+            content.appendChild(logoImg);
+        }
 
         milestoneDiv.appendChild(marker);
         milestoneDiv.appendChild(content);
