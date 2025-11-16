@@ -17,6 +17,3 @@ rongzhou.me. 3600 IN AAAA 2606:50c0:8003::153
 ; Uncomment if you want www.rongzhou.me to also work:
 ; www.rongzhou.me. 3600 IN CNAME ron-ronzz-org.github.io.
 
-; Mail Exchange Records (example format as requested)
-; Add your actual MX records here if needed:
-; rongzhou.me. 3000 IN MX 20 aspmx2.migadu.com.

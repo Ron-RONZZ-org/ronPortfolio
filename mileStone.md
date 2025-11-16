@@ -43,6 +43,7 @@
 - Bullet points
   - Specialization : methods and digitalization
 - Logo : https://yt3.googleusercontent.com/CArZE33ItAV2YhcZRRHLY3NdqG8gk2LFExh-dA4c-Duw0iTGw8uUoSnccJBSTMGaLCD7YcCv-oY=s900-c-k-c0x00ffffff-no-rj
+
 # Category : achievement
 
 ## Guangxi Provincial Excellence Award in Techonology
@@ -52,7 +53,7 @@
   - For my quiz app : WENG 
 - Logo : https://www.developmentaid.org/files/organizationLogos/guangxi-construction-engineering-group-hai-river-water-conservancy-construction-co-ltd-383021.jpg
 
-## The discovery award @ Strathcona High School
+## The Discovery Award @ Strathcona High School
 
 - Time period : 2020
 - Bullet points
@@ -66,14 +67,14 @@
 
 # Category : work
 
-## Student representative for the faculty of Engineering Science  @ UCL 
+## Student Representative for the Faculty of Engineering Science  @ UCL 
 
 - Time period : 2023 - 2024
 - Bullet points
 - Logo : https://praxis.encommun.io/media/notes/note_11953/ucl.jpg
 
 
-## Academic board member, voting @ UCL
+## Academic Board Member, voting @ UCL
 
 - Time period : 2023 - 2024
 - Bullet points
