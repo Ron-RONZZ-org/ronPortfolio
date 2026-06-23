@@ -1,5 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 
+// ── Shared language enum ────────────────────────────────
+
+export const LanguageEnum = z.enum(['en', 'fr', 'zh', 'eo']);
+
 // ── CV entries ──────────────────────────────────────────────
 
 const cvSchema = z.object({
@@ -10,7 +14,7 @@ const cvSchema = z.object({
   end: z.number().optional(),             // absent = "Present"
   icon: z.string().optional(),
   logo: z.string().optional(),
-  language: z.enum(['en', 'fr', 'zh']),
+  language: LanguageEnum,
   sortOrder: z.number().optional(),       // tiebreaker within same year
 });
 
@@ -25,7 +29,7 @@ const blogSchema = z.object({
   published: z.boolean().default(true),
   created: z.string(),                    // ISO date string
   modified: z.string().optional(),
-  language: z.enum(['en', 'fr', 'zh']).default('en'),
+  language: LanguageEnum.default('en'),
 });
 
 // ── Portfolio entries ───────────────────────────────────────
@@ -38,7 +42,7 @@ const portfolioSchema = z.object({
   url: z.string().optional(),              // primary project link
   sourceUrl: z.string().optional(),        // source code link (for software)
   logo: z.string().optional(),             // path to logo image
-  language: z.enum(['en', 'fr', 'zh']),
+  language: LanguageEnum,
   sortOrder: z.number().optional(),
 });
 
