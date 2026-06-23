@@ -25,7 +25,7 @@ for (const lang of Object.keys(grouped)) {
 }
 
 // Pre-render all entries so we can use Content in the template
-const langs = ['en', 'fr', 'zh'] as const;
+const langs = ['en', 'fr', 'zh', 'eo'] as const;
 
 type RenderedEntry = {
   entry: typeof allEntries[number];

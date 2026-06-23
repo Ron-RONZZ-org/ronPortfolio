@@ -18,7 +18,7 @@ Context resolution order (highest priority first):
 
 ## Project Overview
 
-**ronPortfolio** is Ron's personal portfolio website — a static site built with Astro. It showcases Ron's professional journey, achievements, education, personal projects, and a blog. The site supports three languages (EN/FR/ZH) via client-side i18n switching.
+**ronPortfolio** is Ron's personal portfolio website — a static site built with Astro. It showcases Ron's professional journey, achievements, education, personal projects, and a blog. The site supports four languages (EN/FR/ZH/EO) via client-side i18n switching.
 
 ---
 
@@ -119,7 +119,7 @@ start: 2023
 end: 2024                   # omit for "Present"
 icon: "🚀"                  # optional emoji
 logo: "https://..."         # optional URL
-language: "en"              # en | fr | zh
+language: "en"              # en | fr | zh | eo
 sortOrder: 1                # optional tiebreaker
 ---
 - Bullet point 1

@@ -7,7 +7,9 @@
 import { chromium } from 'playwright';
 
 const BASE = 'http://localhost:4322';
-const SUPPORTED_LANGS = ['en', 'fr', 'zh'];
+const SUPPORTED_LANGS = ['en', 'fr', 'zh', 'eo'];
+const CV_SLUGS = 10;    // unique CV entry slugs
+const PORTFOLIO_SLUGS = 7; // unique portfolio entry slugs
 
 let passed = 0;
 let failed = 0;
@@ -43,7 +45,7 @@ async function run() {
     assert(await page.title() !== '', 'Page has a title');
     assert(await page.locator('h1').textContent() === 'Ron', 'Shows "Ron" heading');
     assert(await page.locator('.profile-photo').count() === 1, 'Has profile photo');
-    assert(await page.locator('.lang-btn').count() === 3, 'Has 3 language toggle buttons');
+    assert(await page.locator('.lang-btn').count() === SUPPORTED_LANGS.length, `Has ${SUPPORTED_LANGS.length} language toggle buttons`);
     assert(await page.locator('.link-card').count() >= 6, 'Has 6+ link cards');
 
     // Check links go to correct paths
@@ -56,17 +58,21 @@ async function run() {
     assert(hrefs.includes('/projects'), 'Has link to /projects');
     assert(hrefs.includes('/blog'), 'Has link to /blog');
 
-    // language toggle works
+    // language toggle works – cycle through all supported languages
     await page.locator('.lang-btn[data-lang="fr"]').click();
     await page.waitForTimeout(300);
     const frText = await page.locator('[data-i18n="bio"]').textContent();
     assert(frText.includes('Salut'), 'French toggle works: bio shows French');
 
-    // Switch to Chinese
     await page.locator('.lang-btn[data-lang="zh"]').click();
     await page.waitForTimeout(300);
     const zhText = await page.locator('[data-i18n="bio"]').textContent();
     assert(zhText.includes('你好'), 'Chinese toggle works: bio shows Chinese');
+
+    await page.locator('.lang-btn[data-lang="eo"]').click();
+    await page.waitForTimeout(300);
+    const eoText = await page.locator('[data-i18n="bio"]').textContent();
+    assert(eoText.includes('Saluton'), 'Esperanto toggle works: bio shows Esperanto');
 
     // Switch back to English
     await page.locator('.lang-btn[data-lang="en"]').click();
@@ -86,7 +92,8 @@ async function run() {
     assert(await page.locator('h1').textContent() === 'My Journey', 'CV page heading');
     assert(await page.locator('.filter-btn').count() === 5, 'Has 5 filter buttons');
     assert(await page.locator('.filter-btn.active').count() === 1, 'One filter active by default');
-    assert(await page.locator('.milestone').count() === 30, 'Has 30 milestone entries (10 × 3 languages)');
+    const expectedMilestones = CV_SLUGS * SUPPORTED_LANGS.length;
+    assert(await page.locator('.milestone').count() === expectedMilestones, `Has ${expectedMilestones} milestone entries (${CV_SLUGS} × ${SUPPORTED_LANGS.length} languages)`);
 
     // All milestones for non-English languages should be hidden by default
     const visibleCount = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
@@ -159,7 +166,7 @@ async function run() {
     await page.goto(`${BASE}/language/`, { waitUntil: 'networkidle' });
 
     assert(await page.locator('h1').textContent() === 'Choose Your Language', 'Language picker heading');
-    assert(await page.locator('.lang-option').count() === 3, 'Has 3 language options');
+    assert(await page.locator('.lang-option').count() === SUPPORTED_LANGS.length, `Has ${SUPPORTED_LANGS.length} language options`);
 
     // Click a language option → navigates to /
     await page.locator('.lang-option').first().click();
@@ -176,7 +183,8 @@ async function run() {
     await page.goto(`${BASE}/portfolio/`, { waitUntil: 'networkidle' });
 
     assert(await page.locator('h1').textContent() === 'Portfolio of Projects', 'Portfolio page heading');
-    assert(await page.locator('.portfolio-card').count() === 21, 'Has 21 portfolio entries (7 × 3 languages)');
+    const expectedPortfolioCards = PORTFOLIO_SLUGS * SUPPORTED_LANGS.length;
+    assert(await page.locator('.portfolio-card').count() === expectedPortfolioCards, `Has ${expectedPortfolioCards} portfolio entries (${PORTFOLIO_SLUGS} × ${SUPPORTED_LANGS.length} languages)`);
     assert(await page.locator('.back-link').count() === 1, 'Has back link');
 
     // i18n
