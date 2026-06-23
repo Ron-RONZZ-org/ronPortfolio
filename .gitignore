@@ -23,6 +23,9 @@ Thumbs.db
 dist/
 build/
 
-# Node modules (if added in future)
+# Node modules
 node_modules/
 package-lock.json
+
+# Astro cache
+.astro/

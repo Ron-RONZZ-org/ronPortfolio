@@ -1,0 +1,115 @@
+---
+// Base layout — every page extends this.
+// Inlines translation data for client-side i18n switching
+// and provides the language detection banner + toggle.
+
+import fs from 'node:fs';
+
+const translations = JSON.parse(
+  fs.readFileSync('translations/translation-strings.json', 'utf-8'),
+);
+
+interface Props {
+  titleKey?: string;   // i18n key for the page title
+  title?: string;      // English fallback title
+}
+
+const { titleKey = 'page_title_home', title = "Ron's Portfolio" } = Astro.props;
+const tJson = JSON.stringify(translations);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n={titleKey}>{title}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>" />
+
+    <!-- Inline i18n engine — no external fetch needed -->
+    <script is:inline define:vars={{ translations: tJson }}>
+      const TRANSLATIONS = JSON.parse(translations);
+      const SUPPORTED = ['en', 'fr', 'zh'];
+      const DEFAULT_LANG = 'en';
+      let currentLang = null;
+
+      function t(key) {
+        return TRANSLATIONS[currentLang]?.[key]
+          ?? TRANSLATIONS[DEFAULT_LANG]?.[key]
+          ?? key;
+      }
+
+      function updatePage() {
+        // data-i18n text nodes
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = t(key);
+          } else {
+            el.textContent = t(key);
+          }
+        });
+        // document title
+        const titleEl = document.querySelector('title[data-i18n]');
+        if (titleEl) document.title = t(titleEl.getAttribute('data-i18n'));
+        // language‑scoped content blocks (e.g. CV milestones)
+        document.querySelectorAll('[data-lang-content]').forEach(el => {
+          const show = el.getAttribute('data-lang-content') === currentLang;
+          el.classList.toggle('hidden-by-lang', !show);
+        });
+        // toggle buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
+        });
+        document.documentElement.lang = currentLang;
+      }
+
+      function setLanguage(lang) {
+        if (!SUPPORTED.includes(lang)) return;
+        currentLang = lang;
+        localStorage.setItem('preferredLanguage', lang);
+        updatePage();
+        document.getElementById('lang-banner')?.classList.remove('visible');
+      }
+
+      function detectLanguage() {
+        const saved = localStorage.getItem('preferredLanguage');
+        if (saved && SUPPORTED.includes(saved)) return saved;
+        const browser = (navigator.language || navigator.userLanguage || '').toLowerCase().slice(0, 2);
+        if (SUPPORTED.includes(browser)) return browser;
+        return null;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const detected = detectLanguage();
+        if (detected) {
+          setLanguage(detected);
+        } else {
+          document.getElementById('lang-banner')?.classList.add('visible');
+        }
+      });
+
+      window.__setLanguage = setLanguage;
+    </script>
+  </head>
+  <body>
+    <!-- Language detection fallback banner -->
+    <div id="lang-banner" class="lang-banner">
+      <span data-i18n="lang_banner_text">Could not detect your language. Please choose:</span>
+      <button onclick="__setLanguage('en')">English</button>
+      <button onclick="__setLanguage('fr')">Français</button>
+      <button onclick="__setLanguage('zh')">中文</button>
+    </div>
+
+    <div class="container">
+      <!-- Persistent language toggle -->
+      <div class="language-toggle">
+        <button class="lang-btn" data-lang="en" onclick="__setLanguage('en')">EN</button>
+        <button class="lang-btn" data-lang="fr" onclick="__setLanguage('fr')">FR</button>
+        <button class="lang-btn" data-lang="zh" onclick="__setLanguage('zh')">ZH</button>
+      </div>
+
+      <slot />
+    </div>
+  </body>
+</html>

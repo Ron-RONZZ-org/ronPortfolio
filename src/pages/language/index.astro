@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base titleKey="page_title_language" title="Choose Language - Ron's Portfolio">
+  <div class="lang-picker">
+    <h1 data-i18n="language_title">Choose Your Language</h1>
+    <p data-i18n="language_description">
+      Please select your preferred language to continue.
+    </p>
+
+    <div class="lang-options">
+      <a href="/" class="lang-option" onclick="__setLanguage('en'); return false;">
+        English
+        <span class="label">English</span>
+      </a>
+      <a href="/" class="lang-option" onclick="__setLanguage('fr'); return false;">
+        Français
+        <span class="label">French</span>
+      </a>
+      <a href="/" class="lang-option" onclick="__setLanguage('zh'); return false;">
+        中文
+        <span class="label">Chinese</span>
+      </a>
+    </div>
+  </div>
+</Base>

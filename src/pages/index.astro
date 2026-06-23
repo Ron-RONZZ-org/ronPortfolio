@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titleKey="page_title_home" title="Ron's Portfolio">
+  <header>
+    <img
+      src="/img/tp_w_Ron-portrait-de-stylo--Par-Stelina-Chen-.png"
+      alt="Profile Photo"
+      class="profile-photo"
+    />
+    <h1>Ron</h1>
+    <p class="bio" data-i18n="bio">
+      Hi, I am Ron, passionate about open-source, culture, and AI in the physical world.
+    </p>
+  </header>
+
+  <main>
+    <div class="links-container">
+      <a href="/cv" class="link-card">
+        <span class="link-icon">📋</span>
+        <span class="link-text" data-i18n="cv_link">Curriculum Vitae</span>
+      </a>
+
+      <a href="/contact" class="link-card">
+        <span class="link-icon">✉️</span>
+        <span class="link-text" data-i18n="contact_link">Reach out to me</span>
+      </a>
+
+      <a href="https://ronzz.org/" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">🌟</span>
+        <span class="link-text" data-i18n="blog_link">My blog : Ronzz.org</span>
+      </a>
+
+      <a href="https://cdn.ronzz.org/ronzz/rong-porfolio.html" class="link-card" target="_blank" rel="noopener">
+        <span class="link-icon">💻</span>
+        <span class="link-text" data-i18n="past_work">Portfolio of Past Work</span>
+      </a>
+
+      <a href="/blog" class="link-card">
+        <span class="link-icon">📝</span>
+        <span class="link-text" data-i18n="blog_title">Blog</span>
+      </a>
+    </div>
+  </main>
+</Base>

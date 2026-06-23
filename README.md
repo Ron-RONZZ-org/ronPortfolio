@@ -1,39 +1,99 @@
 # ronPortfolio
-Rong's personal portfolio linktree
+
+Ron's personal portfolio — built with Astro.
 
 ## Live Site
-Visit the portfolio at: [rongzhou.me](https://rongzhou.me)
 
-## Deployment
-This site is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+[rongzhou.me](https://rongzhou.me)
 
-### Setup Instructions
-1. **DNS Configuration**: Ensure your domain (rongzhou.me) has the following DNS records:
-   - `A` record pointing to GitHub Pages IPs:
-     - 185.199.108.153
-     - 185.199.109.153
-     - 185.199.110.153
-     - 185.199.111.153
-   - Or `CNAME` record pointing to: `ron-ronzz-org.github.io`
+## Tech Stack
 
-2. **GitHub Pages Settings**:
-   - Go to repository Settings > Pages
-   - Source should be set to "GitHub Actions"
-   - Custom domain should be set to `rongzhou.me`
-
-3. **Automatic Deployment**: 
-   - The GitHub Actions workflow (`.github/workflows/deploy.yml`) handles deployment automatically
-   - Any push to the `main` branch triggers a new deployment
-   - Manual deployment can be triggered from the Actions tab
-
-## Local Development
-Simply open `index.html` in a web browser. No build process is required.
+- **Framework**: [Astro](https://astro.build) 5.x (static site generator)
+- **Content**: Markdown with YAML frontmatter via Astro Content Collections
+- **i18n**: Client-side with inlined translations (EN/FR/ZH)
+- **Search**: Client-side with MiniSearch (blog)
+- **Deployment**: GitHub Pages via GitHub Actions
 
 ## Project Structure
-- `index.html` - Main landing page
-- `cv.html` - CV page with timeline
-- `contact.html` - Contact information
-- `styles.css` - Global styles
-- `js/cv.js` - CV timeline parser
-- `mileStone.md` - CV data in markdown format
-- `img/` - Image assets
+
+```
+├── src/
+│   ├── layouts/Base.astro   # Shared layout (i18n, nav, head)
+│   ├── pages/
+│   │   ├── index.astro      # Landing page
+│   │   ├── cv.astro         # CV timeline
+│   │   ├── contact.astro    # Contact page
+│   │   ├── blog/
+│   │   │   ├── index.astro  # Blog listing (search/sort/filter)
+│   │   │   └── [slug].astro # Individual articles
+│   │   ├── language/        # Language picker fallback
+│   │   └── 404.astro
+│   ├── content/
+│   │   ├── config.ts        # Content collection schemas
+│   │   └── cv/              # CV milestones (per language)
+│   └── styles/global.css
+├── public/
+│   ├── CNAME                # Custom domain
+│   └── img/                 # Static images
+├── examples/blog/           # Sample blog articles
+├── translations/            # i18n string tables
+└── astro.config.mjs
+```
+
+## Development
+
+```bash
+npm install
+npm run dev     # Start dev server (http://localhost:4321)
+npm run build   # Build to dist/
+npm run preview # Preview build
+```
+
+## Adding a CV Milestone
+
+Create a file in `src/content/cv/{lang}-{slug}.md`:
+
+```markdown
+---
+id: "my-milestone"
+category: "work"             # education | work | achievement | personal
+title: "My Milestone"
+start: 2025
+end: 2026                    # omit for "Present"
+icon: "🚀"
+logo: "https://example.com/logo.png"
+language: "en"
+sortOrder: 1
+---
+- Bullet point 1
+- Bullet point 2
+  - Nested sub-point
+```
+
+## Adding a Blog Post
+
+Create a file in `src/content/blog/{slug}.md`:
+
+```markdown
+---
+id: "my-post"
+title: "Post Title"
+description: "Short description"
+tags: ["tech", "life"]
+series: "Series Name"
+created: "2025-06-23"
+modified: "2025-06-23"
+language: "en"
+published: true
+---
+Content in markdown...
+```
+
+## Deployment
+
+Pushes to `main` automatically deploy via GitHub Actions.
+The custom domain (rongzhou.me) is configured via `public/CNAME`.
+
+## License
+
+MIT

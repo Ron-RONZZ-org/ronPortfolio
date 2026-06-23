@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+// Load all CV entries and group by language
+const allEntries = await getCollection('cv');
+const grouped: Record<string, typeof allEntries> = {};
+for (const entry of allEntries) {
+  const lang = entry.data.language;
+  if (!grouped[lang]) grouped[lang] = [];
+  grouped[lang].push(entry);
+}
+
+// Sort each group: newest first, then sortOrder
+for (const lang of Object.keys(grouped)) {
+  grouped[lang].sort((a, b) => {
+    const endA = a.data.end ?? 9999;
+    const endB = b.data.end ?? 9999;
+    if (endB !== endA) return endB - endA;
+    const startA = a.data.start;
+    const startB = b.data.start;
+    if (startB !== startA) return startB - startA;
+    return (a.data.sortOrder ?? 0) - (b.data.sortOrder ?? 0);
+  });
+}
+
+// Pre-render all entries so we can use Content in the template
+const langs = ['en', 'fr', 'zh'] as const;
+
+type RenderedEntry = {
+  entry: typeof allEntries[number];
+  Content: any;
+};
+const rendered: RenderedEntry[] = [];
+for (const lang of langs) {
+  for (const entry of grouped[lang] ?? []) {
+    const { Content } = await entry.render();
+    rendered.push({ entry, Content });
+  }
+}
+---
+
+<Base titleKey="page_title_cv" title="CV & Timeline - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="my_journey">My Journey</h1>
+    <p class="bio" data-i18n="journey_bio">
+      A timeline of my education, work experience, achievements, and personal milestones.
+    </p>
+  </header>
+
+  <div class="filter-buttons">
+    <button class="filter-btn all active" data-filter="all" data-i18n="filter_all">All</button>
+    <button class="filter-btn education" data-filter="education" data-i18n="filter_education">Education</button>
+    <button class="filter-btn work" data-filter="work" data-i18n="filter_work">Work</button>
+    <button class="filter-btn achievement" data-filter="achievement" data-i18n="filter_achievement">Achievements</button>
+    <button class="filter-btn personal" data-filter="personal" data-i18n="filter_personal">Personal</button>
+  </div>
+
+  <main class="timeline" id="timeline">
+    {
+      rendered.map(({ entry, Content }) => {
+        const icon = entry.data.icon ?? '';
+        const period = entry.data.end
+          ? `${entry.data.start} – ${entry.data.end}`
+          : `${entry.data.start} – Present`;
+
+        return (
+          <div
+            class={`milestone ${entry.data.category}`}
+            data-category={entry.data.category}
+            data-lang-content={entry.data.language}
+          >
+            <div class="milestone-marker"></div>
+            <div class="milestone-content">
+              <div class="milestone-time">{period}</div>
+              <h3 class="milestone-title">
+                {icon ? `${icon} ` : ''}{entry.data.title}
+              </h3>
+              {entry.body && Content && (
+                <div class="milestone-details">
+                  <Content />
+                </div>
+              )}
+              {entry.data.logo && (
+                <img
+                  class="milestone-logo"
+                  src={entry.data.logo}
+                  alt="Logo"
+                  onerror="this.style.display='none'"
+                />
+              )}
+            </div>
+          </div>
+        );
+      })
+    }
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>
+
+<script is:inline>
+  // Category filter — works on visible (non-hidden-by-lang) milestones
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const timeline = document.getElementById('timeline');
+
+    function applyFilter(filter) {
+      const milestones = timeline?.querySelectorAll('.milestone') ?? [];
+      milestones.forEach(m => {
+        const hiddenByLang = m.classList.contains('hidden-by-lang');
+        if (filter === 'all') {
+          m.classList.toggle('hidden', hiddenByLang);
+        } else {
+          const cat = m.getAttribute('data-category');
+          m.classList.toggle('hidden', cat !== filter || hiddenByLang);
+        }
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.getAttribute('data-filter'));
+      });
+    });
+
+    // Re-apply filter when language changes (milestones visibility changes)
+    if (timeline) {
+      const observer = new MutationObserver(() => {
+        const active = document.querySelector('.filter-btn.active');
+        if (active) applyFilter(active.getAttribute('data-filter'));
+      });
+      observer.observe(timeline, {
+        attributes: false,
+        childList: false,
+        subtree: true,
+        attributeFilter: ['class'],
+      });
+    }
+  });
+</script>
+
+<style is:global>
+  .hidden-by-lang { display: none; }
+</style>
