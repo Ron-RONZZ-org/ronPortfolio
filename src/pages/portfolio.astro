@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const allEntries = await getCollection('portfolio');
+const languages = ['en', 'fr', 'zh'];
+---
+
+<Base titleKey="page_title_portfolio" title="Portfolio - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="portfolio_title">Portfolio of Projects</h1>
+    <p class="bio" data-i18n="portfolio_bio">
+      A selection of projects and activities I contribute to.
+    </p>
+  </header>
+
+  <main>
+    <div class="portfolio-grid">
+      {
+        allEntries
+          .sort((a, b) => (a.data.sortOrder ?? 99) - (b.data.sortOrder ?? 99))
+          .map(entry => (
+            <article
+              class="portfolio-card"
+              data-lang-content={entry.data.language}
+            >
+              <span
+                class={`portfolio-card-category ${entry.data.category}`}
+                data-i18n={`portfolio_category_${entry.data.category}`}
+              >
+                {entry.data.category}
+              </span>
+
+              <h3 class="portfolio-card-title">
+                {entry.data.url
+                  ? <a href={entry.data.url} target="_blank" rel="noopener">{entry.data.title}</a>
+                  : entry.data.title
+                }
+              </h3>
+
+              {entry.data.description &&
+                <p class="portfolio-card-desc">{entry.data.description}</p>
+              }
+
+              <div class="portfolio-card-links">
+                {entry.data.url &&
+                  <a
+                    href={entry.data.url}
+                    target="_blank"
+                    rel="noopener"
+                    class="portfolio-card-link"
+                  >
+                    ↗ {entry.data.url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')}
+                  </a>
+                }
+                {entry.data.sourceUrl &&
+                  <a
+                    href={entry.data.sourceUrl}
+                    target="_blank"
+                    rel="noopener"
+                    class="portfolio-card-link"
+                  >
+                    &lt;/&gt; Source
+                  </a>
+                }
+              </div>
+
+              {entry.data.logo &&
+                <img
+                  class="portfolio-card-logo"
+                  src={entry.data.logo}
+                  alt={`${entry.data.title} logo`}
+                  loading="lazy"
+                />
+              }
+            </article>
+          ))
+      }
+    </div>
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>

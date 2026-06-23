@@ -44,13 +44,16 @@ async function run() {
     assert(await page.locator('h1').textContent() === 'Ron', 'Shows "Ron" heading');
     assert(await page.locator('.profile-photo').count() === 1, 'Has profile photo');
     assert(await page.locator('.lang-btn').count() === 3, 'Has 3 language toggle buttons');
-    assert(await page.locator('.link-card').count() >= 4, 'Has 4+ link cards');
+    assert(await page.locator('.link-card').count() >= 6, 'Has 6+ link cards');
 
     // Check links go to correct paths
     const links = await page.locator('.link-card').all();
     const hrefs = await Promise.all(links.map(l => l.getAttribute('href')));
     assert(hrefs.includes('/cv'), 'Has link to /cv');
     assert(hrefs.includes('/contact'), 'Has link to /contact');
+    assert(hrefs.includes('/portfolio'), 'Has link to /portfolio');
+    assert(hrefs.includes('/research'), 'Has link to /research');
+    assert(hrefs.includes('/projects'), 'Has link to /projects');
     assert(hrefs.includes('/blog'), 'Has link to /blog');
 
     // language toggle works
@@ -117,7 +120,7 @@ async function run() {
 
     const h1Text = await page.locator('h1').textContent();
     assert(h1Text === 'Get In Touch', 'Contact page heading');
-    assert(await page.locator('.contact-item').count() >= 3, 'Has 3+ contact items');
+    assert(await page.locator('.contact-item').count() === 2, 'Has 2 contact items');
     assert(await page.locator('a[href="mailto:hi@rongzhou.me"]').count() === 1, 'Has email link');
     assert(await page.locator('.back-link').count() === 1, 'Has back link');
 
@@ -166,7 +169,54 @@ async function run() {
     await ctx.close();
   }
 
-  // ── 6. 404 page ───────────────────────────────────
+  // ── 6. Portfolio page ─────────────────────────────
+  console.log('\n=== Portfolio page ===');
+  {
+    const { ctx, page } = await pageInFreshContext(browser);
+    await page.goto(`${BASE}/portfolio/`, { waitUntil: 'networkidle' });
+
+    assert(await page.locator('h1').textContent() === 'Portfolio of Projects', 'Portfolio page heading');
+    assert(await page.locator('.portfolio-card').count() === 21, 'Has 21 portfolio entries (7 × 3 languages)');
+    assert(await page.locator('.back-link').count() === 1, 'Has back link');
+
+    // i18n
+    await page.locator('.lang-btn[data-lang="fr"]').click();
+    await page.waitForTimeout(300);
+    const frHeading = await page.locator('h1').textContent();
+    assert(frHeading === 'Portfolio de projets', 'Portfolio heading switches to French');
+
+    await ctx.close();
+  }
+
+  // ── 7. Research page ──────────────────────────────
+  console.log('\n=== Research page ===');
+  {
+    const { ctx, page } = await pageInFreshContext(browser);
+    await page.goto(`${BASE}/research/`, { waitUntil: 'networkidle' });
+
+    assert(await page.locator('h1').textContent() === 'Academic Research', 'Research page heading');
+    assert(await page.locator('.external-link-item').count() === 2, 'Has 2 research links');
+    assert(await page.locator('a[href*="orcid.org"]').count() === 1, 'Has ORCID link');
+    assert(await page.locator('a[href*="hal.science"]').count() === 1, 'Has HAL link');
+
+    await ctx.close();
+  }
+
+  // ── 8. Projects page ──────────────────────────────
+  console.log('\n=== Projects page ===');
+  {
+    const { ctx, page } = await pageInFreshContext(browser);
+    await page.goto(`${BASE}/projects/`, { waitUntil: 'networkidle' });
+
+    assert(await page.locator('h1').textContent() === 'Programming Projects', 'Projects page heading');
+    assert(await page.locator('.external-link-item').count() === 2, 'Has 2 project links');
+    assert(await page.locator('a[href*="github.com/Ron-RONZZ-org"]').count() >= 1, 'Has GitHub link');
+    assert(await page.locator('a[href*="midiverse.org"]').count() === 1, 'Has Midiverse link');
+
+    await ctx.close();
+  }
+
+  // ── 9. 404 page ───────────────────────────────────
   console.log('\n=== 404 page ===');
   {
     const { ctx, page } = await pageInFreshContext(browser);

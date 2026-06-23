@@ -73,6 +73,9 @@ ronPortfolio/
 │   │   ├── index.astro        # Landing page (profile + links)
 │   │   ├── cv.astro           # CV timeline
 │   │   ├── contact.astro      # Contact page
+│   │   ├── portfolio.astro    # Portfolio listing
+│   │   ├── research.astro     # Academic research links
+│   │   ├── projects.astro     # Programming projects
 │   │   ├── blog/
 │   │   │   ├── index.astro    # Blog listing (search/sort/filter)
 │   │   │   └── [slug].astro   # Individual blog post
@@ -122,6 +125,22 @@ sortOrder: 1                # optional tiebreaker
 - Bullet point 1
 - Nested:
   - Sub point
+```
+
+### Portfolio entry (`src/content/portfolio/*.md`)
+```yaml
+---
+id: "unique-id"
+category: "software"            # software | research | association
+title: "Display Title"
+description: "Short description"
+url: "https://..."              # primary project link
+sourceUrl: "https://..."        # source code link (optional)
+logo: "/img/logo.svg"           # path to logo image (optional)
+language: "en"                  # en | fr | zh
+sortOrder: 1                    # optional ordering
+---
+Optional body text...
 ```
 
 ### Blog post (`src/content/blog/*.md`)

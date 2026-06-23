@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titleKey="page_title_research" title="Academic Research - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="research_title">Academic Research</h1>
+    <p class="bio" data-i18n="research_bio">
+      My research profile and publications.
+    </p>
+  </header>
+
+  <main>
+    <div class="external-links">
+      <!-- ORCID -->
+      <a
+        href="https://orcid.org/0009-0009-1047-2080"
+        target="_blank"
+        rel="noopener"
+        class="external-link-item"
+      >
+        <div class="external-link-logo">
+          <img src="/img/orcid-logo.svg" alt="ORCID logo" />
+        </div>
+        <div class="external-link-info">
+          <div class="external-link-title" data-i18n="research_orcid">ORCID Profile</div>
+          <div class="external-link-desc" data-i18n="research_orcid_desc">
+            ORCID: 0009-0009-1047-2080
+          </div>
+        </div>
+        <span class="external-link-arrow">↗</span>
+      </a>
+
+      <!-- HAL preprints -->
+      <a
+        href="https://hal.science/search/index/q/*/authIdHal_i/1690178"
+        target="_blank"
+        rel="noopener"
+        class="external-link-item"
+      >
+        <div class="external-link-logo">
+          <img src="/img/hal-logo.svg" alt="HAL logo" />
+        </div>
+        <div class="external-link-info">
+          <div class="external-link-title" data-i18n="research_preprints">
+            See all my preprints on HAL
+          </div>
+          <div class="external-link-desc">hal.science</div>
+        </div>
+        <span class="external-link-arrow">↗</span>
+      </a>
+    </div>
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>

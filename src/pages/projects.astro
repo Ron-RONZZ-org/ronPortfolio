@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titleKey="page_title_projects" title="Programming Projects - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="projects_title">Programming Projects</h1>
+    <p class="bio" data-i18n="projects_bio">
+      Open-source software and tools I develop.
+    </p>
+  </header>
+
+  <main>
+    <div class="external-links">
+      <!-- GitHub profile -->
+      <a
+        href="https://github.com/Ron-RONZZ-org"
+        target="_blank"
+        rel="noopener"
+        class="external-link-item"
+      >
+        <div class="external-link-logo">
+          <img src="/img/github-logo.svg" alt="GitHub logo" />
+        </div>
+        <div class="external-link-info">
+          <div class="external-link-title" data-i18n="projects_github">GitHub Profile</div>
+          <div class="external-link-desc" data-i18n="projects_github_desc">Ron-RONZZ-org</div>
+        </div>
+        <span class="external-link-arrow">↗</span>
+      </a>
+
+      <!-- Midiverse -->
+      <div class="external-link-item">
+        <div class="external-link-logo">
+          <img src="/img/midiverse-logo.svg" alt="Midiverse logo" />
+        </div>
+        <div class="external-link-info">
+          <div class="external-link-title" data-i18n="projects_midiverse">Midiverse</div>
+          <div class="external-link-desc" data-i18n="projects_midiverse_desc">
+            Share your knowledge freely — collaborative markmap sharing platform
+          </div>
+          <div style="margin-top:0.5rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://midiverse.org" target="_blank" rel="noopener" class="portfolio-card-link" data-i18n="projects_midiverse_try">
+              ↗ Try it out
+            </a>
+            <a href="https://github.com/Ron-RONZZ-org/midiverse" target="_blank" rel="noopener" class="portfolio-card-link" data-i18n="projects_midiverse_source">
+              &lt;/&gt; Source code
+            </a>
+          </div>
+        </div>
+        <span class="external-link-arrow">↗</span>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>

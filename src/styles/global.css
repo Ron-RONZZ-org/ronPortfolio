@@ -39,6 +39,11 @@ a {
   text-decoration: none;
 }
 
+/* ── i18n language content visibility ─────────────── */
+.hidden-by-lang {
+  display: none;
+}
+
 /* ── Utilities ──────────────────────────────────────── */
 .container {
   max-width: var(--max-width);
@@ -335,6 +340,138 @@ h1 {
 }
 .contact-value a:hover {
   text-decoration: underline;
+}
+
+/* ── Portfolio grid ────────────────────────────────── */
+.portfolio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.portfolio-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.portfolio-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+.portfolio-card-logo {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  max-width: 48px;
+  max-height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.portfolio-card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  padding-right: 64px;
+}
+.portfolio-card-title a {
+  color: var(--secondary-color);
+}
+.portfolio-card-desc {
+  color: #c1c7cd;
+  margin-bottom: 0.75rem;
+}
+.portfolio-card-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.portfolio-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.portfolio-card-link:hover {
+  text-decoration: underline;
+}
+.portfolio-card-category {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+.portfolio-card-category.software { background: var(--education-color); color: #fff; }
+.portfolio-card-category.research { background: var(--achievement-color); color: #fff; }
+.portfolio-card-category.association { background: var(--personal-color); color: #fff; }
+
+/* ── External links (research & projects pages) ────── */
+.external-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.external-link-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.external-link-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+.external-link-item a {
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+.external-link-item a:hover {
+  text-decoration: underline;
+}
+.external-link-logo {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.external-link-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.external-link-info {
+  flex: 1;
+}
+.external-link-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+.external-link-desc {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+.external-link-arrow {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  flex-shrink: 0;
 }
 
 /* ── Blog list ──────────────────────────────────────── */
