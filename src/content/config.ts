@@ -5,17 +5,13 @@ import { defineCollection, z } from 'astro:content';
 export const LanguageEnum = z.enum(['en', 'fr', 'zh', 'eo']);
 
 // ── CV entries ──────────────────────────────────────────────
+// Shared fields (category, start, end, icon, logo, sortOrder)
+// and translated titles live in meta.json, merged at render
+// time. The .md files are stubs with id + language + body.
 
 const cvSchema = z.object({
   id: z.string().min(1),
-  category: z.enum(['education', 'work', 'achievement', 'personal']),
-  title: z.string().min(1),
-  start: z.number(),
-  end: z.number().optional(),             // absent = "Present"
-  icon: z.string().optional(),
-  logo: z.string().optional(),
   language: LanguageEnum,
-  sortOrder: z.number().optional(),       // tiebreaker within same year
 });
 
 // ── Blog posts ──────────────────────────────────────────────

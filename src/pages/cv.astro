@@ -1,11 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import cvMeta from '../content/cv/meta.json';
 
-// Load all CV entries and group by language
 const allEntries = await getCollection('cv');
-const grouped: Record<string, typeof allEntries> = {};
-for (const entry of allEntries) {
+
+// Merge with meta.json (shared fields + translated titles)
+const enriched = allEntries.map(entry => {
+  const m = cvMeta[entry.data.id];
+  if (!m) return entry;
+  const t = m.translations?.[entry.data.language] ?? {};
+  return {
+    ...entry,
+    data: {
+      id: entry.data.id,
+      language: entry.data.language,
+      category: m.category,
+      start: m.start,
+      end: m.end,
+      icon: m.icon ?? '',
+      logo: m.logo,
+      sortOrder: m.sortOrder ?? 0,
+      title: t.title ?? entry.data.id,
+    },
+  };
+});
+
+// Group by language
+const grouped: Record<string, typeof enriched> = {};
+for (const entry of enriched) {
   const lang = entry.data.language;
   if (!grouped[lang]) grouped[lang] = [];
   grouped[lang].push(entry);
@@ -28,7 +51,7 @@ for (const lang of Object.keys(grouped)) {
 const langs = ['en', 'fr', 'zh', 'eo'] as const;
 
 type RenderedEntry = {
-  entry: typeof allEntries[number];
+  entry: typeof enriched[number];
   Content: any;
 };
 const rendered: RenderedEntry[] = [];

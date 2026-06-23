@@ -109,23 +109,43 @@ ronPortfolio/
 
 ## Content Collection Schemas
 
-### CV entry (`src/content/cv/*.md`)
+### CV entry (`src/content/cv/`)
+
+CV uses a **split content model** identical to portfolio — `meta.json` holds shared fields and translations, per-language `.md` stubs hold body content only.
+
+**`meta.json`** — single source of truth for shared fields and translations:
+```json
+{
+  "weng": {
+    "category": "personal",
+    "start": 2020,
+    "icon": "📱",
+    "logo": "https://...",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "Developed First App : WENG" },
+      "fr": { "title": "Développement de la première application : WENG" }
+    },
+    "body": {
+      "en": "- Bullet point 1\n- Nested:\n  - Sub point",
+      "fr": "..."
+    }
+  }
+}
+```
+
+**Per-language `.md` stubs** — minimal frontmatter + body:
 ```yaml
 ---
 id: "unique-id"
-category: "education"       # education | work | achievement | personal
-title: "Display Title"
-start: 2023
-end: 2024                   # omit for "Present"
-icon: "🚀"                  # optional emoji
-logo: "https://..."         # optional URL
-language: "en"              # en | fr | zh | eo
-sortOrder: 1                # optional tiebreaker
+language: "en"
 ---
 - Bullet point 1
 - Nested:
   - Sub point
 ```
+
+**Render-time merge**: `cv.astro` imports `meta.json` and enriches each collection entry with shared fields and translated title.
 
 ### Portfolio entry (`src/content/portfolio/`)
 

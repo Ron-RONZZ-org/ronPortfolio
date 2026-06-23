@@ -1,0 +1,195 @@
+{
+  "weng": {
+    "category": "personal",
+    "start": 2020,
+    "icon": "\uD83D\uDCF1",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRwBC1EWTHm9QLGEaBDc1leFU5jZBglg_rig&s",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "Developed First App : WENG" },
+      "fr": { "title": "Développement de la première application : WENG" },
+      "zh": { "title": "开发第一个应用程序：WENG" },
+      "eo": { "title": "Disvolvis Unuan Apon : WENG" }
+    },
+    "body": {
+      "en": "- Quiz app to enhance student revision experience\n- Adoption by multiple class teacher",
+      "fr": "- Application de quiz pour améliorer l'expérience de révision des étudiants\n- Adoption par plusieurs enseignants de classe",
+      "zh": "- 帮助学生提升复习体验的测验应用\n- 被多位教师采用",
+      "eo": "- Kviza apo por plibonigi studentan recenzadon\n- Adoptita de pluraj klasaj instruistoj"
+    }
+  },
+  "but-genie-industriel": {
+    "category": "education",
+    "start": 2025,
+    "icon": "",
+    "logo": "https://yt3.googleusercontent.com/CArZE33ItAV2YhcZRRHLY3NdqG8gk2LFExh-dA4c-Duw0iTGw8uUoSnccJBSTMGaLCD7YcCv-oY=s900-c-k-c0x00ffffff-no-rj",
+    "sortOrder": 3,
+    "translations": {
+      "en": { "title": "BUT Génie Industriel et Maintenance @ Univ-Lorraine" },
+      "fr": { "title": "BUT Génie Industriel et Maintenance @ Univ-Lorraine" },
+      "zh": { "title": "洛林大学工业工程与维护学士学位 @ Univ-Lorraine" },
+      "eo": { "title": "BUT Génie Industriel et Maintenance @ Univ-Lorraine" }
+    },
+    "body": {
+      "en": "- Specialization : methods and digitalization\n- Link: [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "fr": "- Spécialisation : méthodes et digitalisation\n- Lien : [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "zh": "- 专业方向：方法与数字化\n- 链接： [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "eo": "- Specialiĝo : metodoj kaj ciferecigo\n- Ligilo: [Univ-Lorraine](https://www.univ-lorraine.fr/)"
+    }
+  },
+  "discovery-award": {
+    "category": "achievement",
+    "start": 2020,
+    "icon": "",
+    "logo": "https://pbs.twimg.com/profile_images/1060288701945733120/B5I2HLkx_400x400.jpg",
+    "sortOrder": 2,
+    "translations": {
+      "en": { "title": "The Discovery Award @ Strathcona High School" },
+      "fr": { "title": "The Discovery Award @ Strathcona High School" },
+      "zh": { "title": "Strathcona高中发现奖" },
+      "eo": { "title": "La Premio pri Malkovro @ Strathcona High School" }
+    },
+    "body": {
+      "en": "- For active participation in the school community",
+      "fr": "- Pour participation active dans la communauté scolaire",
+      "zh": "- 因积极参与学校社区活动",
+      "eo": "- Pro aktiva partopreno en la lerneja komunumo"
+    }
+  },
+  "guangxi-award": {
+    "category": "achievement",
+    "start": 2021,
+    "icon": "",
+    "logo": "https://www.developmentaid.org/files/organizationLogos/guangxi-construction-engineering-group-hai-river-water-conservancy-construction-co-ltd-383021.jpg",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "Guangxi Provincial Excellence Award in Technology" },
+      "fr": { "title": "Prix d'excellence provincial de Guangxi en technologie" },
+      "zh": { "title": "广西省科技卓越奖" },
+      "eo": { "title": "Guangxi-Provinca Plejboneca Premio en Teknologio" }
+    },
+    "body": {
+      "en": "- For my quiz app : WENG",
+      "fr": "- Pour mon application de quiz : WENG",
+      "zh": "- 为我的测验应用程序：WENG",
+      "eo": "- Pro mia kviza apo : WENG"
+    }
+  },
+  "ronzz-org": {
+    "category": "personal",
+    "start": 2024,
+    "icon": "\u270D\uFE0F",
+    "logo": "https://ronzz.org/content/images/2025/02/tp_Ronzz.org_logo.png",
+    "sortOrder": 2,
+    "translations": {
+      "en": { "title": "Started Ronzz.org" },
+      "fr": { "title": "Lancement de Ronzz.org" },
+      "zh": { "title": "创建Ronzz.org" },
+      "eo": { "title": "Komencis Ronzz.org" }
+    },
+    "body": {
+      "en": "- Writing on\n  - technology\n  - my daily life\n  - and the world",
+      "fr": "- J'écris sur\n  - la technologie\n  - la vie\n  - et le monde",
+      "zh": "- 我写\n  - 技术\n  - 我的日常生活\n  - 世界",
+      "eo": "- Skribanta pri\n  - teknologio\n  - mia ĉiutaga vivo\n  - kaj la mondo"
+    }
+  },
+  "student-of-month": {
+    "category": "achievement",
+    "start": 2025,
+    "icon": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr-pF94axp4uyHlCRGgAS8fJbLumjzePqwww&s",
+    "sortOrder": 3,
+    "translations": {
+      "en": { "title": "La Maison d'Étudiant Épinal : Student of the month" },
+      "fr": { "title": "La Maison d'Étudiant Épinal : Étudiant du mois" },
+      "zh": { "title": "La Maison d'Étudiant Épinal：月度学生" },
+      "eo": { "title": "La Maison d'Étudiant Épinal : Studento de la monato" }
+    },
+    "body": {
+      "en": "",
+      "fr": "",
+      "zh": "",
+      "eo": ""
+    }
+  },
+  "ucl-academic-board": {
+    "category": "work",
+    "start": 2023,
+    "end": 2024,
+    "icon": "",
+    "logo": "https://praxis.encommun.io/media/notes/note_11953/ucl.jpg",
+    "sortOrder": 2,
+    "translations": {
+      "en": { "title": "Academic Board Member, voting @ UCL" },
+      "fr": { "title": "Membre du conseil académique, avec droit de vote @ UCL" },
+      "zh": { "title": "UCL学术委员会成员" },
+      "eo": { "title": "Akademia Estrarano, voĉdonanto @ UCL" }
+    },
+    "body": {
+      "en": "",
+      "fr": "",
+      "zh": "",
+      "eo": ""
+    }
+  },
+  "ucl-engineering": {
+    "category": "education",
+    "start": 2023,
+    "end": 2024,
+    "icon": "",
+    "logo": "https://praxis.encommun.io/media/notes/note_11953/ucl.jpg",
+    "sortOrder": 2,
+    "translations": {
+      "en": { "title": "Certificate of Higher Education in Engineering Science @ UCL" },
+      "fr": { "title": "Certificate of Higher Education in Engineering Science @ UCL" },
+      "zh": { "title": "UCL工程科学高等教育证书" },
+      "eo": { "title": "Atestilo pri Supera Edukado en Inĝenieriko @ UCL" }
+    },
+    "body": {
+      "en": "- Upper second-class: average 60%\n- Specialization in Geoinformation Systems\n- Faculty student representative",
+      "fr": "- Mention bien\n- moyenne : 60%\n- Spécialisation en systèmes d'information géographique\n- Représentant étudiant de la faculté",
+      "zh": "- 二等一学位：平均分60%\n- 地理信息系统方向\n- 学院学生代表",
+      "eo": "- Supra dua-klaso: averaĝe 60%\n- Specialiĝo en Geinformaj Sistemoj\n- Fakultata studenta reprezentanto"
+    }
+  },
+  "ucl-student-rep": {
+    "category": "work",
+    "start": 2023,
+    "end": 2024,
+    "icon": "",
+    "logo": "https://praxis.encommun.io/media/notes/note_11953/ucl.jpg",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "Student Representative for the Faculty of Engineering Science @ UCL" },
+      "fr": { "title": "Représentant étudiant pour la Faculté des sciences de l'ingénieur @ UCL" },
+      "zh": { "title": "UCL工程科学学院学生代表" },
+      "eo": { "title": "Studenta Reprezentanto por la Fakultato de Inĝenieriko @ UCL" }
+    },
+    "body": {
+      "en": "",
+      "fr": "",
+      "zh": "",
+      "eo": ""
+    }
+  },
+  "uk-a-levels": {
+    "category": "education",
+    "start": 2023,
+    "icon": "",
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd8lQdcnsu8SFVkfAHpypYBEKrwGFi3nWcFQ&s",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "General Certificate of Education, Advanced level (UK A-levels)" },
+      "fr": { "title": "British General Certificate of Education, Advanced level (équivalent : Baccalauréat Général français)" },
+      "zh": { "title": "英国高级水平普通教育证书（UK A-levels）" },
+      "eo": { "title": "Ĝenerala Atestilo pri Edukado, Altnivela nivelo (UK A-levels)" }
+    },
+    "body": {
+      "en": "- Grade AAA* (Further Math-Math-Physics)",
+      "fr": "- Mention très bien avec félicitations de jury\n- Spécialisation Mathématiques et Science Naturelle\n- Option Mathématiques expertes\n- Note AAA* (Mathématiques avancées-Mathématiques-Physique)",
+      "zh": "- 成绩AAA*（高等数学-数学-物理）",
+      "eo": "- Grado AAA* (Plua Matematiko-Matematiko-Fiziko)"
+    }
+  }
+}
