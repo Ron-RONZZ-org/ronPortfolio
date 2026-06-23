@@ -91,8 +91,8 @@ const searchIndex = published.map(p => ({
       ))}
     </div>
 
-    <!-- No results placeholder -->
-    <div class="no-results" id="blog-no-results" style="display:none;" data-i18n="blog_no_results">
+    <!-- No results placeholder — visible when no articles at all OR after filtering -->
+    <div class="no-results" id="blog-no-results" style={published.length === 0 ? "display:block;" : "display:none;"} data-i18n="blog_no_results">
       No articles found.
     </div>
   </main>
