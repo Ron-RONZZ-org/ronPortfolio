@@ -49,11 +49,12 @@ for (const lang of langs) {
   </header>
 
   <div class="filter-buttons">
-    <button class="filter-btn all active" data-filter="all" data-i18n="filter_all">All</button>
-    <button class="filter-btn education" data-filter="education" data-i18n="filter_education">Education</button>
-    <button class="filter-btn work" data-filter="work" data-i18n="filter_work">Work</button>
-    <button class="filter-btn achievement" data-filter="achievement" data-i18n="filter_achievement">Achievements</button>
-    <button class="filter-btn personal" data-filter="personal" data-i18n="filter_personal">Personal</button>
+    <button class="filter-btn education active" data-filter="education" data-i18n="filter_education">Education</button>
+    <button class="filter-btn work active" data-filter="work" data-i18n="filter_work">Work</button>
+    <button class="filter-btn achievement active" data-filter="achievement" data-i18n="filter_achievement">Achievements</button>
+    <button class="filter-btn personal active" data-filter="personal" data-i18n="filter_personal">Personal</button>
+    <button class="filter-btn select-all" data-filter="select-all" data-i18n="filter_select_all">Select All</button>
+    <button class="filter-btn deselect-all" data-filter="deselect-all" data-i18n="filter_deselect_all">Deselect All</button>
   </div>
 
   <main class="timeline" id="timeline">
@@ -102,38 +103,68 @@ for (const lang of langs) {
 </Base>
 
 <script is:inline>
-  // Category filter — works on visible (non-hidden-by-lang) milestones
+  // Multi-select category filter — works on visible (non-hidden-by-lang) milestones
   document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.filter-btn');
     const timeline = document.getElementById('timeline');
+    const categoryButtons = document.querySelectorAll('.filter-btn.education, .filter-btn.work, .filter-btn.achievement, .filter-btn.personal');
+    const selectAllBtn = document.querySelector('.filter-btn.select-all');
+    const deselectAllBtn = document.querySelector('.filter-btn.deselect-all');
+    let selectedCategories = new Set();
 
-    function applyFilter(filter) {
+    function applyFilter() {
       const milestones = timeline?.querySelectorAll('.milestone') ?? [];
+      const noSelection = selectedCategories.size === 0;
       milestones.forEach(m => {
         const hiddenByLang = m.classList.contains('hidden-by-lang');
-        if (filter === 'all') {
-          m.classList.toggle('hidden', hiddenByLang);
+        if (noSelection) {
+          m.classList.toggle('hidden', true);
         } else {
           const cat = m.getAttribute('data-category');
-          m.classList.toggle('hidden', cat !== filter || hiddenByLang);
+          m.classList.toggle('hidden', !selectedCategories.has(cat) || hiddenByLang);
         }
       });
     }
 
-    buttons.forEach(btn => {
+    // Individual category toggle
+    categoryButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        applyFilter(btn.getAttribute('data-filter'));
+        const filter = btn.getAttribute('data-filter');
+        if (selectedCategories.has(filter)) {
+          selectedCategories.delete(filter);
+          btn.classList.remove('active');
+        } else {
+          selectedCategories.add(filter);
+          btn.classList.add('active');
+        }
+        applyFilter();
       });
     });
 
-    // Re-apply filter when language changes (milestones visibility changes)
-    if (timeline) {
-      const observer = new MutationObserver(() => {
-        const active = document.querySelector('.filter-btn.active');
-        if (active) applyFilter(active.getAttribute('data-filter'));
+    // Select All
+    selectAllBtn?.addEventListener('click', () => {
+      categoryButtons.forEach(b => {
+        selectedCategories.add(b.getAttribute('data-filter'));
+        b.classList.add('active');
       });
+      applyFilter();
+    });
+
+    // Deselect All
+    deselectAllBtn?.addEventListener('click', () => {
+      selectedCategories.clear();
+      categoryButtons.forEach(b => b.classList.remove('active'));
+      applyFilter();
+    });
+
+    // Start with all categories selected
+    categoryButtons.forEach(b => {
+      selectedCategories.add(b.getAttribute('data-filter'));
+    });
+    applyFilter();
+
+    // Re-apply filter when language changes
+    if (timeline) {
+      const observer = new MutationObserver(() => applyFilter());
       observer.observe(timeline, {
         attributes: false,
         childList: false,

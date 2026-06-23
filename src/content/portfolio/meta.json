@@ -1,0 +1,107 @@
+{
+  "france-stats": {
+    "category": "software",
+    "url": "https://france-stats.org",
+    "priority": 100,
+    "translations": {
+      "en": { "title": "France en chiffres", "description": "A Great History of France, with data and animations" },
+      "fr": { "title": "France en chiffres", "description": "Une Grande Histoire de la France, chiffrée et animée" },
+      "zh": { "title": "France en chiffres", "description": "用数据和动画讲述法国伟大历史" },
+      "eo": { "title": "France en chiffres", "description": "Granda Historio de Francio, kun datumoj kaj animacioj" }
+    },
+    "body": {
+      "en": "A data-driven website presenting French history through animated charts and statistics.",
+      "fr": "Site web présentant l'histoire de France à travers des données chiffrées et des visualisations animées.",
+      "zh": "通过数据可视化和动画图表呈现法国历史的网站。",
+      "eo": "Datum- movita retejo prezentanta francan historion per animaciaj grafikaĵoj kaj statistikoj."
+    }
+  },
+  "midiverse": {
+    "category": "software",
+    "url": "https://midiverse.org",
+    "sourceUrl": "https://github.com/Ron-RONZZ-org/midiverse",
+    "logo": "/img/midiverse-logo.svg",
+    "priority": 80,
+    "translations": {
+      "en": { "title": "Midiverse", "description": "Share your knowledge freely — collaborative markmap sharing platform" },
+      "fr": { "title": "Midiverse", "description": "Partagez vos connaissances librement — plateforme collaborative de markmaps" },
+      "zh": { "title": "Midiverse", "description": "自由分享知识 — 协作式思维导图分享平台" },
+      "eo": { "title": "Midiverse", "description": "Libere dividu vian scion — kunlabora markmap-kunhava platformo" }
+    },
+    "body": {
+      "en": "Share your interactive mind maps with everyone, or with no one.",
+      "fr": "Partagez vos cartes mentales interactives avec tout le monde, ou avec personne.",
+      "zh": "与所有人或没有人分享您的交互式思维导图。",
+      "eo": "Dividu viajn interagajn mensmapojn kun ĉiuj, aŭ kun neniu."
+    }
+  },
+  "hal-paper-epinal-diurnal-cycle": {
+    "category": "research",
+    "url": "https://hal.science/hal-05655953v1/document",
+    "logo": "/img/hal-logo.svg",
+    "priority": 75,
+    "translations": {
+      "en": { "title": "The Shifting Peak: Diurnal Maximum Temperature Trends in Épinal", "description": "Analyzing diurnal maximum temperature trends in Épinal (Grand Est, France)" },
+      "fr": { "title": "The Shifting Peak: Tendances des températures maximales diurnes à Épinal", "description": "Analyse des tendances de température maximale diurne à Épinal (Grand Est, France)" },
+      "zh": { "title": "The Shifting Peak: 埃皮纳勒日最高温度趋势分析", "description": "分析法国大东部大区埃皮纳勒的日最高温度变化趋势" },
+      "eo": { "title": "La Ŝoviĝanta Pinto: Tagaj Maksimumaj Temperaturaj Tendencoj en Épinal", "description": "Analizante tagajn maksimumajn temperaturajn tendencojn en Épinal (Grand Est, Francio)" }
+    },
+    "body": {
+      "en": "Research publication on climate change analyzing peak temperature shifts in Épinal.",
+      "fr": "Publication de recherche sur le changement climatique analysant l'évolution des pics de température à Épinal.",
+      "zh": "关于气候变化的研究论文，分析埃皮纳勒的最高温度峰值变化。",
+      "eo": "Esplora publikaĵo pri klimata ŝanĝo analizanta pintajn temperaturŝanĝojn en Épinal."
+    }
+  },
+  "cgt-epinal": {
+    "category": "association",
+    "url": "https://ul.cgt-epinal.fr/",
+    "priority": 60,
+    "translations": {
+      "en": { "title": "CGT Épinal", "description": "Website of the CGT Épinal Local Union" },
+      "fr": { "title": "CGT Épinal", "description": "Site web de l'Union Locale CGT d'Épinal" },
+      "zh": { "title": "CGT 埃皮纳勒", "description": "CGT 埃皮纳勒地方工会网站" },
+      "eo": { "title": "CGT Épinal", "description": "Retejo de la CGT Épinal Loka Sindikato" }
+    },
+    "body": {
+      "en": "Creation and maintenance of the website for the CGT Épinal Local Union.",
+      "fr": "Création et maintenance du site web de l'Union Locale CGT d'Épinal.",
+      "zh": "创建并维护 CGT 埃皮纳勒地方工会网站。",
+      "eo": "Kreado kaj prizorgado de la retejo por la CGT Épinal Loka Sindikato."
+    }
+  },
+  "afev-metz": {
+    "category": "association",
+    "url": "https://afev.org/grand-est/metz",
+    "priority": 50,
+    "translations": {
+      "en": { "title": "Afev Metz", "description": "KAPseur at Afev Metz" },
+      "fr": { "title": "Afev Metz", "description": "KAPseur à l'Afev Metz" },
+      "zh": { "title": "Afev 梅斯", "description": "Afev 梅斯 KAPseur 志愿者" },
+      "eo": { "title": "Afev Metz", "description": "KAPseur ĉe Afev Metz" }
+    },
+    "body": {
+      "en": "Volunteer engagement as a KAPseur at the Student Foundation for the City Association (Afev) in Metz.",
+      "fr": "Engagement associatif en tant que KAPseur à l'Association de la Fondation Étudiante pour la Ville (Afev) à Metz.",
+      "zh": "在梅斯学生城市基金会协会 (Afev) 担任 KAPseur 志愿者。",
+      "eo": "Volontula engaĝiĝo kiel KAPseur ĉe la Studenta Fonduso por la Urba Asocio (Afev) en Metz."
+    }
+  },
+  "metz-a-velo": {
+    "category": "association",
+    "url": "https://www.metzavelo.fr/",
+    "priority": 40,
+    "translations": {
+      "en": { "title": "Metz à Vélo", "description": "Community bicycle workshop" },
+      "fr": { "title": "Metz à Vélo", "description": "Atelier participatif pour le vélo" },
+      "zh": { "title": "梅斯骑行", "description": "社区自行车工作坊" },
+      "eo": { "title": "Metz à Vélo", "description": "Komunuma bicikla metiejo" }
+    },
+    "body": {
+      "en": "Member of the community workshop promoting cycling and bike repair in Metz.",
+      "fr": "Membre de l'atelier participatif pour la promotion et la réparation du vélo à Metz.",
+      "zh": "梅斯社区自行车推广与维修工作坊成员。",
+      "eo": "Membro de la komunuma metiejo kiu promocias bicikladon kaj biciklan riparon en Metz."
+    }
+  }
+}

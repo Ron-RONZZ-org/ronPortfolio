@@ -127,21 +127,44 @@ sortOrder: 1                # optional tiebreaker
   - Sub point
 ```
 
-### Portfolio entry (`src/content/portfolio/*.md`)
+### Portfolio entry (`src/content/portfolio/`)
+
+Portfolio uses a **split content model** to avoid duplicating shared fields across language variants:
+
+**`meta.json`** — single source of truth for shared fields and translations:
+```json
+{
+  "france-stats": {
+    "category": "software",
+    "url": "https://france-stats.org",
+    "priority": 100,
+    "logo": "/img/logo.svg",
+    "translations": {
+      "en": { "title": "Title", "description": "Desc" },
+      "fr": { "title": "Titre", "description": "Desc" },
+      "zh": { "title": "标题", "description": "描述" },
+      "eo": { "title": "Titolo", "description": "Priskribo" }
+    },
+    "body": {
+      "en": "English body...",
+      "fr": "Corps français..."
+    }
+  }
+}
+```
+
+**Per-language `.md` stubs** — minimal frontmatter + body:
 ```yaml
 ---
 id: "unique-id"
-category: "software"            # software | research | association
-title: "Display Title"
-description: "Short description"
-url: "https://..."              # primary project link
-sourceUrl: "https://..."        # source code link (optional)
-logo: "/img/logo.svg"           # path to logo image (optional)
-language: "en"                  # en | fr | zh
-sortOrder: 1                    # optional ordering
+language: "en"              # en | fr | zh | eo
 ---
 Optional body text...
 ```
+- `priority` (number, optional): descending sort, higher = shown first
+- Category values: `software` | `research` | `association`
+
+**Render-time merge**: `portfolio.astro` imports `meta.json` and enriches each collection entry with shared fields and translated title/description.
 
 ### Blog post (`src/content/blog/*.md`)
 ```yaml

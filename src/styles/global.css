@@ -203,6 +203,11 @@ h1 {
 .filter-btn.work { background-color: var(--work-color); }
 .filter-btn.achievement { background-color: var(--achievement-color); }
 .filter-btn.personal { background-color: var(--personal-color); }
+.filter-btn.software { background-color: var(--education-color); }
+.filter-btn.research { background-color: var(--achievement-color); }
+.filter-btn.association { background-color: var(--personal-color); }
+.filter-btn.select-all { background-color: #3d4f5c; }
+.filter-btn.deselect-all { background-color: #555; }
 
 .timeline {
   position: relative;
@@ -413,6 +418,7 @@ h1 {
 .portfolio-card-category.software { background: var(--education-color); color: #fff; }
 .portfolio-card-category.research { background: var(--achievement-color); color: #fff; }
 .portfolio-card-category.association { background: var(--personal-color); color: #fff; }
+.portfolio-card.hidden { display: none; }
 
 /* ── External links (research & projects pages) ────── */
 .external-links {

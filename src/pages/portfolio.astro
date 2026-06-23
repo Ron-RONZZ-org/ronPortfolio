@@ -1,9 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import meta from '../content/portfolio/meta.json';
 
 const allEntries = await getCollection('portfolio');
-const languages = ['en', 'fr', 'zh', 'eo'];
+
+// Merge content collection stubs with meta.json (single source of truth)
+const enriched = allEntries.map(entry => {
+  const m = meta[entry.data.id];
+  if (!m) {
+    return { ...entry, data: { ...entry.data, priority: 0, category: 'software' } };
+  }
+  const t = m.translations?.[entry.data.language] ?? {};
+  return {
+    ...entry,
+    data: {
+      id: entry.data.id,
+      language: entry.data.language,
+      category: m.category,
+      priority: m.priority ?? 0,
+      url: m.url,
+      sourceUrl: m.sourceUrl,
+      logo: m.logo,
+      title: t.title ?? entry.data.id,
+      description: t.description,
+    },
+  };
+});
+
+// Sort by descending priority (higher = shown first)
+enriched.sort((a, b) => (b.data.priority ?? 0) - (a.data.priority ?? 0));
 ---
 
 <Base titleKey="page_title_portfolio" title="Portfolio - Ron's Portfolio">
@@ -14,67 +40,74 @@ const languages = ['en', 'fr', 'zh', 'eo'];
     </p>
   </header>
 
+  <div class="filter-buttons">
+    <button class="filter-btn software active" data-filter="software" data-i18n="portfolio_category_software">Software</button>
+    <button class="filter-btn research active" data-filter="research" data-i18n="portfolio_category_research">Research</button>
+    <button class="filter-btn association active" data-filter="association" data-i18n="portfolio_category_association">Association</button>
+    <button class="filter-btn select-all" data-filter="select-all" data-i18n="filter_select_all">Select All</button>
+    <button class="filter-btn deselect-all" data-filter="deselect-all" data-i18n="filter_deselect_all">Deselect All</button>
+  </div>
+
   <main>
-    <div class="portfolio-grid">
+    <div class="portfolio-grid" id="portfolio-grid">
       {
-        allEntries
-          .sort((a, b) => (a.data.sortOrder ?? 99) - (b.data.sortOrder ?? 99))
-          .map(entry => (
-            <article
-              class="portfolio-card"
-              data-lang-content={entry.data.language}
+        enriched.map(entry => (
+          <article
+            class={`portfolio-card ${entry.data.category}`}
+            data-category={entry.data.category}
+            data-lang-content={entry.data.language}
+          >
+            <span
+              class={`portfolio-card-category ${entry.data.category}`}
+              data-i18n={`portfolio_category_${entry.data.category}`}
             >
-              <span
-                class={`portfolio-card-category ${entry.data.category}`}
-                data-i18n={`portfolio_category_${entry.data.category}`}
-              >
-                {entry.data.category}
-              </span>
+              {entry.data.category}
+            </span>
 
-              <h3 class="portfolio-card-title">
-                {entry.data.url
-                  ? <a href={entry.data.url} target="_blank" rel="noopener">{entry.data.title}</a>
-                  : entry.data.title
-                }
-              </h3>
-
-              {entry.data.description &&
-                <p class="portfolio-card-desc">{entry.data.description}</p>
+            <h3 class="portfolio-card-title">
+              {entry.data.url
+                ? <a href={entry.data.url} target="_blank" rel="noopener">{entry.data.title}</a>
+                : entry.data.title
               }
+            </h3>
 
-              <div class="portfolio-card-links">
-                {entry.data.url &&
-                  <a
-                    href={entry.data.url}
-                    target="_blank"
-                    rel="noopener"
-                    class="portfolio-card-link"
-                  >
-                    ↗ {entry.data.url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')}
-                  </a>
-                }
-                {entry.data.sourceUrl &&
-                  <a
-                    href={entry.data.sourceUrl}
-                    target="_blank"
-                    rel="noopener"
-                    class="portfolio-card-link"
-                  >
-                    &lt;/&gt; Source
-                  </a>
-                }
-              </div>
+            {entry.data.description &&
+              <p class="portfolio-card-desc">{entry.data.description}</p>
+            }
 
-              {entry.data.logo &&
-                <img
-                  class="portfolio-card-logo"
-                  src={entry.data.logo}
-                  alt={`${entry.data.title} logo`}
-                  loading="lazy"
-                />
+            <div class="portfolio-card-links">
+              {entry.data.url &&
+                <a
+                  href={entry.data.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="portfolio-card-link"
+                >
+                  ↗ {entry.data.url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')}
+                </a>
               }
-            </article>
-          ))
+              {entry.data.sourceUrl &&
+                <a
+                  href={entry.data.sourceUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="portfolio-card-link"
+                >
+                  &lt;/&gt; Source
+                </a>
+              }
+            </div>
+
+            {entry.data.logo &&
+              <img
+                class="portfolio-card-logo"
+                src={entry.data.logo}
+                alt={`${entry.data.title} logo`}
+                loading="lazy"
+              />
+            }
+          </article>
+        ))
       }
     </div>
   </main>
@@ -83,3 +116,80 @@ const languages = ['en', 'fr', 'zh', 'eo'];
     <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
   </nav>
 </Base>
+
+<script is:inline>
+  // Multi-select category filter for portfolio
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('portfolio-grid');
+    const categoryButtons = document.querySelectorAll('.filter-btn.software, .filter-btn.research, .filter-btn.association');
+    const selectAllBtn = document.querySelector('.filter-btn.select-all');
+    const deselectAllBtn = document.querySelector('.filter-btn.deselect-all');
+    let selectedCategories = new Set();
+
+    function applyFilter() {
+      const cards = grid?.querySelectorAll('.portfolio-card') ?? [];
+      const noSelection = selectedCategories.size === 0;
+      cards.forEach(card => {
+        const hiddenByLang = card.classList.contains('hidden-by-lang');
+        if (noSelection) {
+          card.classList.toggle('hidden', true);
+        } else {
+          const cat = card.getAttribute('data-category');
+          card.classList.toggle('hidden', !selectedCategories.has(cat) || hiddenByLang);
+        }
+      });
+    }
+
+    // Individual category toggle
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        if (selectedCategories.has(filter)) {
+          selectedCategories.delete(filter);
+          btn.classList.remove('active');
+        } else {
+          selectedCategories.add(filter);
+          btn.classList.add('active');
+        }
+        applyFilter();
+      });
+    });
+
+    // Select All
+    selectAllBtn?.addEventListener('click', () => {
+      categoryButtons.forEach(b => {
+        selectedCategories.add(b.getAttribute('data-filter'));
+        b.classList.add('active');
+      });
+      applyFilter();
+    });
+
+    // Deselect All
+    deselectAllBtn?.addEventListener('click', () => {
+      selectedCategories.clear();
+      categoryButtons.forEach(b => b.classList.remove('active'));
+      applyFilter();
+    });
+
+    // Start with all categories selected
+    categoryButtons.forEach(b => {
+      selectedCategories.add(b.getAttribute('data-filter'));
+    });
+    applyFilter();
+
+    // Re-apply filter when language changes (toggles hidden-by-lang)
+    if (grid) {
+      const observer = new MutationObserver(() => applyFilter());
+      observer.observe(grid, {
+        attributes: false,
+        childList: false,
+        subtree: true,
+        attributeFilter: ['class'],
+      });
+    }
+  });
+</script>
+
+<style is:global>
+  .portfolio-card.hidden { display: none; }
+</style>

@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 const BASE = 'http://localhost:4322';
 const SUPPORTED_LANGS = ['en', 'fr', 'zh', 'eo'];
 const CV_SLUGS = 10;    // unique CV entry slugs
-const PORTFOLIO_SLUGS = 7; // unique portfolio entry slugs
+const PORTFOLIO_SLUGS = 6; // unique portfolio entry slugs
 
 let passed = 0;
 let failed = 0;
@@ -55,8 +55,8 @@ async function run() {
     assert(hrefs.includes('/contact'), 'Has link to /contact');
     assert(hrefs.includes('/portfolio'), 'Has link to /portfolio');
     assert(hrefs.includes('/research'), 'Has link to /research');
-    assert(hrefs.includes('/projects'), 'Has link to /projects');
-    assert(hrefs.includes('/blog'), 'Has link to /blog');
+    assert(hrefs.includes('/FOSS'), 'Has link to /FOSS');
+    assert(hrefs.includes('/inspire'), 'Has link to /inspire');
 
     // language toggle works – cycle through all supported languages
     await page.locator('.lang-btn[data-lang="fr"]').click();
@@ -90,31 +90,47 @@ async function run() {
     await page.goto(`${BASE}/cv/`, { waitUntil: 'networkidle' });
 
     assert(await page.locator('h1').textContent() === 'My Journey', 'CV page heading');
-    assert(await page.locator('.filter-btn').count() === 5, 'Has 5 filter buttons');
-    assert(await page.locator('.filter-btn.active').count() === 1, 'One filter active by default');
+    assert(await page.locator('.filter-btn').count() === 6, 'Has 6 filter buttons (4 categories + select/deselect all)');
+    assert(await page.locator('.filter-btn.active').count() === 4, 'All 4 category buttons active by default');
     const expectedMilestones = CV_SLUGS * SUPPORTED_LANGS.length;
     assert(await page.locator('.milestone').count() === expectedMilestones, `Has ${expectedMilestones} milestone entries (${CV_SLUGS} × ${SUPPORTED_LANGS.length} languages)`);
 
-    // All milestones for non-English languages should be hidden by default
-    const visibleCount = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
-    assert(visibleCount > 0, `Has ${visibleCount} visible milestones in default language`);
+    // All milestones for default language should be visible (all categories selected)
+    const initialVisible = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
+    assert(initialVisible > 0, `Has ${initialVisible} visible milestones in default language`);
 
-    // Filter by category
+    // Toggle education OFF → education milestones should be hidden
     const eduBtn = page.locator('.filter-btn.education');
     await eduBtn.click();
     await page.waitForTimeout(200);
-    const visibleEdu = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
-    assert(visibleEdu > 0, 'Education filter shows milestones');
+    assert(await eduBtn.evaluate(el => !el.classList.contains('active')), 'Education button no longer active after toggle off');
+    const withoutEdu = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
+    assert(withoutEdu < initialVisible, `Fewer visible (${withoutEdu} < ${initialVisible}) after deselecting education`);
 
-    // Switch language on CV page
+    // Toggle education back ON → all milestones visible again
+    await eduBtn.click();
+    await page.waitForTimeout(200);
+    assert(await eduBtn.evaluate(el => el.classList.contains('active')), 'Education button active after toggle on');
+    const withEdu = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
+    assert(withEdu === initialVisible, `Same visible count (${withEdu} === ${initialVisible}) after re-selecting education`);
+
+    // Deselect All → all milestones hidden
+    await page.locator('.filter-btn.deselect-all').click();
+    await page.waitForTimeout(200);
+    const allHidden = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
+    assert(allHidden === 0, 'All milestones hidden after Deselect All');
+
+    // Select All → all milestones visible again
+    await page.locator('.filter-btn.select-all').click();
+    await page.waitForTimeout(200);
+    const allVisible = await page.locator('.milestone:not(.hidden-by-lang):not(.hidden)').count();
+    assert(allVisible === initialVisible, `All milestones visible (${allVisible} === ${initialVisible}) after Select All`);
+
+    // Switch language on CV page while filter is active
     await page.locator('.lang-btn[data-lang="fr"]').click();
     await page.waitForTimeout(300);
     const frTitle = await page.locator('h1').textContent();
     assert(frTitle === 'Mon Parcours', 'CV page heading switches to French');
-
-    // Reset filter to All
-    await page.locator('.filter-btn.all').click();
-    await page.waitForTimeout(200);
 
     await ctx.close();
   }
@@ -186,6 +202,31 @@ async function run() {
     const expectedPortfolioCards = PORTFOLIO_SLUGS * SUPPORTED_LANGS.length;
     assert(await page.locator('.portfolio-card').count() === expectedPortfolioCards, `Has ${expectedPortfolioCards} portfolio entries (${PORTFOLIO_SLUGS} × ${SUPPORTED_LANGS.length} languages)`);
     assert(await page.locator('.back-link').count() === 1, 'Has back link');
+
+    // Filter buttons
+    assert(await page.locator('.filter-btn').count() === 5, 'Portfolio has 5 filter buttons (3 categories + select/deselect all)');
+    assert(await page.locator('.filter-btn.software.active').count() === 1, 'Software filter active by default');
+    assert(await page.locator('.filter-btn.research.active').count() === 1, 'Research filter active by default');
+    assert(await page.locator('.filter-btn.association.active').count() === 1, 'Association filter active by default');
+
+    // Toggle software OFF → fewer visible cards
+    const initialPortfolioCards = await page.locator('.portfolio-card:not(.hidden-by-lang):not(.hidden)').count();
+    await page.locator('.filter-btn.software').click();
+    await page.waitForTimeout(200);
+    const withoutSoftware = await page.locator('.portfolio-card:not(.hidden-by-lang):not(.hidden)').count();
+    assert(withoutSoftware < initialPortfolioCards, `Fewer cards visible (${withoutSoftware} < ${initialPortfolioCards}) after deselecting software`);
+
+    // Select All
+    await page.locator('.filter-btn.select-all').click();
+    await page.waitForTimeout(200);
+    const afterSelectAll = await page.locator('.portfolio-card:not(.hidden-by-lang):not(.hidden)').count();
+    assert(afterSelectAll === initialPortfolioCards, `All cards visible again (${afterSelectAll} === ${initialPortfolioCards}) after Select All`);
+
+    // Deselect All → all hidden
+    await page.locator('.filter-btn.deselect-all').click();
+    await page.waitForTimeout(200);
+    const allHiddenPortfolio = await page.locator('.portfolio-card:not(.hidden-by-lang):not(.hidden)').count();
+    assert(allHiddenPortfolio === 0, 'All portfolio cards hidden after Deselect All');
 
     // i18n
     await page.locator('.lang-btn[data-lang="fr"]').click();
