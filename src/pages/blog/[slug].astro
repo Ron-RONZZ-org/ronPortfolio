@@ -1,5 +1,5 @@
 ---
-import Base from '../../layouts/Base.astro';
+// Redirect /blog/[slug] → /inspire/[slug] (SEO 301)
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -8,39 +8,9 @@ export async function getStaticPaths() {
     .filter(p => p.data.published)
     .map(p => ({
       params: { slug: p.slug },
-      props: { entry: p },
     }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
-const { data } = entry;
+const { slug } = Astro.params;
+return Astro.redirect(`/inspire/${slug}`, 301);
 ---
-
-<Base title={data.title}>
-  <header>
-    <h1>{data.title}</h1>
-    <div class="meta">
-      <span data-i18n="blog_published">Published</span> {data.created}
-      {data.modified && data.modified !== data.created && (
-        <> · <span data-i18n="blog_modified">Updated</span> {data.modified}</>
-      )}
-      {data.series && <> · <span data-i18n="blog_series">Series</span>: {data.series}</>}
-    </div>
-    {data.tags.length > 0 && (
-      <div class="blog-card-tags" style="justify-content: center;">
-        {data.tags.map(tag => (
-          <span class="blog-card-tag">{tag}</span>
-        ))}
-      </div>
-    )}
-  </header>
-
-  <article class="blog-article">
-    <Content />
-  </article>
-
-  <nav>
-    <a href="/blog" class="back-link" data-i18n="blog_back">← Back to Blog</a>
-  </nav>
-</Base>

@@ -1,0 +1,188 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const published = posts
+  .filter(p => p.data.published)
+  .sort((a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime());
+
+const allTags = [...new Set(published.flatMap(p => p.data.tags))].sort();
+const allSeries = [...new Set(published.map(p => p.data.series).filter(Boolean))].sort();
+
+// Search index — embedded as JSON for client‑side search (minisearch)
+const searchIndex = published.map(p => ({
+  slug: p.slug,
+  title: p.data.title,
+  description: p.data.description ?? '',
+  tags: p.data.tags,
+  series: p.data.series ?? '',
+  created: p.data.created,
+  modified: p.data.modified ?? p.data.created,
+  lang: p.data.language,
+}));
+---
+
+<Base titleKey="page_title_blog" title="Blog - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="blog_title">Blog</h1>
+    <p class="bio" data-i18n="blog_description">
+      Thoughts on technology, culture, and everything in between.
+    </p>
+  </header>
+
+  <main>
+    <!-- Search & controls -->
+    <div class="blog-controls">
+      <input
+        type="search"
+        class="blog-search"
+        id="blog-search"
+        data-i18n="blog_search_placeholder"
+        placeholder="Search articles..."
+      />
+      <select class="blog-sort" id="blog-sort">
+        <option value="newest" data-i18n="blog_sort_newest">Newest</option>
+        <option value="oldest" data-i18n="blog_sort_oldest">Oldest</option>
+        <option value="relevant" data-i18n="blog_sort_relevant">Most Relevant</option>
+      </select>
+    </div>
+
+    <!-- Tag filters -->
+    <div class="blog-filters" id="blog-tag-filters">
+      {allTags.map(tag => (
+        <button class="blog-tag" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+
+    {allSeries.length > 0 && (
+      <div class="blog-filters" id="blog-series-filters" style="margin-top: 0.5rem;">
+        {allSeries.map(s => (
+          <button class="blog-tag" data-series={s}>{s}</button>
+        ))}
+      </div>
+    )}
+
+    <!-- Article list -->
+    <div class="blog-list" id="blog-list">
+      {published.map(post => (
+        <article class="blog-card" data-slug={post.slug} data-lang={post.data.language}>
+          <h2 class="blog-card-title">
+            <a href={`/inspire/${post.slug}`}>{post.data.title}</a>
+          </h2>
+          <div class="blog-card-meta">
+            <span data-i18n="blog_published">Published</span> {post.data.created}
+            {post.data.modified && post.data.modified !== post.data.created && (
+              <> · <span data-i18n="blog_modified">Updated</span> {post.data.modified}</>
+            )}
+            {post.data.series && <> · <span data-i18n="blog_series">Series</span>: {post.data.series}</>}
+          </div>
+          {post.data.description && (
+            <p class="blog-card-desc">{post.data.description}</p>
+          )}
+          {post.data.tags.length > 0 && (
+            <div class="blog-card-tags">
+              {post.data.tags.map(tag => (
+                <span class="blog-card-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <!-- No results placeholder — visible when no articles at all OR after filtering -->
+    <div class="no-results" id="blog-no-results" style={published.length === 0 ? "display:block;" : "display:none;"} data-i18n="blog_no_results">
+      No articles found.
+    </div>
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>
+
+<!-- Search index for client-side filtering -->
+<script is:inline define:vars={{ indexData: JSON.stringify(searchIndex) }}>
+  const INDEX = JSON.parse(indexData);
+  const searchInput = document.getElementById('blog-search');
+  const sortSelect = document.getElementById('blog-sort');
+  const listEl = document.getElementById('blog-list');
+  const noResults = document.getElementById('blog-no-results');
+
+  let activeTag = null;
+  let activeSeries = null;
+  let lastQuery = '';
+
+  // Tag filter clicks
+  document.querySelectorAll('#blog-tag-filters .blog-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.getAttribute('data-tag');
+      activeTag = activeTag === tag ? null : tag;
+      document.querySelectorAll('#blog-tag-filters .blog-tag').forEach(b => b.classList.toggle('active', b.getAttribute('data-tag') === activeTag));
+      applyFilters();
+    });
+  });
+  document.querySelectorAll('#blog-series-filters .blog-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const series = btn.getAttribute('data-series');
+      activeSeries = activeSeries === series ? null : series;
+      document.querySelectorAll('#blog-series-filters .blog-tag').forEach(b => b.classList.toggle('active', b.getAttribute('data-series') === activeSeries));
+      applyFilters();
+    });
+  });
+
+  // Search input
+  searchInput.addEventListener('input', () => {
+    lastQuery = searchInput.value.toLowerCase().trim();
+    applyFilters();
+  });
+
+  // Sort
+  sortSelect.addEventListener('change', applyFilters);
+
+  function applyFilters() {
+    let filtered = INDEX;
+
+    // Tag filter
+    if (activeTag) {
+      filtered = filtered.filter(p => p.tags.includes(activeTag));
+    }
+    // Series filter
+    if (activeSeries) {
+      filtered = filtered.filter(p => p.series === activeSeries);
+    }
+    // Text search
+    if (lastQuery) {
+      filtered = filtered.filter(p =>
+        p.title.toLowerCase().includes(lastQuery) ||
+        p.description.toLowerCase().includes(lastQuery) ||
+        p.tags.some(t => t.toLowerCase().includes(lastQuery))
+      );
+    }
+
+    // Sort
+    const sort = sortSelect.value;
+    if (sort === 'newest') {
+      filtered.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+    } else if (sort === 'oldest') {
+      filtered.sort((a, b) => new Date(a.created).getTime() - new Date(b.created).getTime());
+    } else if (sort === 'relevant') {
+      // Most relevant = most recent + tag match bonus
+      filtered.sort((a, b) => {
+        const aScore = new Date(a.created).getTime() + (activeTag && a.tags.includes(activeTag) ? 86400000 * 365 : 0);
+        const bScore = new Date(b.created).getTime() + (activeTag && b.tags.includes(activeTag) ? 86400000 * 365 : 0);
+        return bScore - aScore;
+      });
+    }
+
+    // Show/hide cards
+    const visible = new Set(filtered.map(p => p.slug));
+    document.querySelectorAll('.blog-card').forEach(card => {
+      const slug = card.getAttribute('data-slug');
+      card.style.display = visible.has(slug) ? '' : 'none';
+    });
+
+    noResults.style.display = filtered.length === 0 ? '' : 'none';
+  }
+</script>
