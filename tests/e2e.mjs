@@ -6,9 +6,9 @@
 
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:4322';
+const BASE = 'http://127.0.0.1:4322';
 const SUPPORTED_LANGS = ['en', 'fr', 'zh', 'eo'];
-const CV_SLUGS = 10;    // unique CV entry slugs
+const CV_SLUGS = 14;    // unique CV entry slugs
 const PORTFOLIO_SLUGS = 6; // unique portfolio entry slugs
 
 let passed = 0;

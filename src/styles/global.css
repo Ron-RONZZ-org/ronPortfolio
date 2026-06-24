@@ -297,6 +297,43 @@ h1 {
   margin-left: 1.5rem;
 }
 
+/* ── CV sidebar (skills / interests / languages) ──── */
+.cv-sidebar {
+  max-width: var(--max-width);
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+.sidebar-block {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.sidebar-block h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--secondary-color);
+}
+.sidebar-block ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-block li {
+  margin-bottom: 0.4rem;
+  color: #c1c7cd;
+  font-size: 0.95rem;
+}
+.sidebar-block a {
+  color: var(--secondary-color);
+}
+.sidebar-block a:hover {
+  text-decoration: underline;
+}
+
 /* ── Contact card ───────────────────────────────────── */
 .contact-card {
   background: var(--card-bg);
@@ -776,6 +813,10 @@ nav {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
     min-width: 45px;
+  }
+  .cv-sidebar {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .blog-controls {
     flex-direction: column;

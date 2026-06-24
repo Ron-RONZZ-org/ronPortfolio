@@ -21,6 +21,7 @@
   "but-genie-industriel": {
     "category": "education",
     "start": 2025,
+    "end": 2026,
     "icon": "",
     "logo": "https://yt3.googleusercontent.com/CArZE33ItAV2YhcZRRHLY3NdqG8gk2LFExh-dA4c-Duw0iTGw8uUoSnccJBSTMGaLCD7YcCv-oY=s900-c-k-c0x00ffffff-no-rj",
     "sortOrder": 3,
@@ -31,10 +32,10 @@
       "eo": { "title": "BUT Génie Industriel et Maintenance @ Univ-Lorraine" }
     },
     "body": {
-      "en": "- Specialization : methods and digitalization\n- Link: [Univ-Lorraine](https://www.univ-lorraine.fr/)",
-      "fr": "- Spécialisation : méthodes et digitalisation\n- Lien : [Univ-Lorraine](https://www.univ-lorraine.fr/)",
-      "zh": "- 专业方向：方法与数字化\n- 链接： [Univ-Lorraine](https://www.univ-lorraine.fr/)",
-      "eo": "- Specialiĝo : metodoj kaj ciferecigo\n- Ligilo: [Univ-Lorraine](https://www.univ-lorraine.fr/)"
+      "en": "- Semester 1 validated, reoriented in Semester 2\n- Specialization : methods and digitalization\n- Link: [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "fr": "- S1 validé, réorienté en S2\n- Spécialisation : méthodes et digitalisation\n- Lien : [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "zh": "- 第一学期通过，第二学期转专业\n- 专业方向：方法与数字化\n- 链接： [Univ-Lorraine](https://www.univ-lorraine.fr/)",
+      "eo": "- Semestro 1 konfirmita, reorientita en Semestro 2\n- Specialiĝo : metodoj kaj ciferecigo\n- Ligilo: [Univ-Lorraine](https://www.univ-lorraine.fr/)"
     }
   },
   "discovery-award": {
@@ -127,10 +128,10 @@
       "eo": { "title": "Akademia Estrarano, voĉdonanto @ UCL" }
     },
     "body": {
-      "en": "",
-      "fr": "",
-      "zh": "",
-      "eo": ""
+      "en": "- Elected University Councillor during studies at University College London\n  - by universal suffrage of undergraduate students of the Faculty of Engineering and Applied Sciences\n- Campaigned (unsuccessfully) for a student kitchen\n- Tried (unsuccessfully) to add an autonomous student section to the university weekly newspaper",
+      "fr": "- Fut élu·e conseiller·ère d'Université pendant mes études à University College London\n  - par suffrage universel des personnes étudiantes en premier cycle universitaire de la Faculté d'Ingénierie et des Sciences Appliquées\n- Essayé, en vain, de militer pour une cuisine étudiante\n- Essayé, en vain, d'ajouter une section étudiante autonome dans l'hebdomadaire universitaire",
+      "zh": "- 在伦敦大学学院学习期间当选大学理事会成员\n  - 由工程与应用科学学院本科生普选产生\n- 尝试为学生争取厨房设施（未成功）\n- 尝试在校报中增设独立学生栏目（未成功）",
+      "eo": "- Elektita Universitata Konsilanto dum studado ĉe University College London\n  - per universala balotrajto de studentoj de la Fakultato de Inĝenieriko kaj Aplikataj Sciencoj\n- Provoj (sensukcesaj) por studenta kuirejo\n- Provoj (sensukcesaj) aldoni aŭtonoman studentan sekcion en la universitata semajngazeto"
     }
   },
   "ucl-engineering": {
@@ -190,6 +191,85 @@
       "fr": "- Mention très bien avec félicitations de jury\n- Spécialisation Mathématiques et Science Naturelle\n- Option Mathématiques expertes\n- Note AAA* (Mathématiques avancées-Mathématiques-Physique)",
       "zh": "- 成绩AAA*（高等数学-数学-物理）",
       "eo": "- Grado AAA* (Plua Matematiko-Matematiko-Fiziko)"
+    }
+  },
+  "france-stat": {
+    "category": "work",
+    "start": 2026,
+    "icon": "",
+    "logo": "",
+    "sortOrder": 0,
+    "translations": {
+      "en": { "title": "Founder of France-stat.org" },
+      "fr": { "title": "Fondateur·ice de France-stat.org" },
+      "zh": { "title": "France-stat.org 创始人" },
+      "eo": { "title": "Fondinto de France-stat.org" }
+    },
+    "body": {
+      "en": "- Data processing and visualization\n- Writing educational articles",
+      "fr": "- Traitement et visualisation des données\n- Rédaction d'articles éducatifs",
+      "zh": "- 数据处理和可视化\n- 撰写教育类文章",
+      "eo": "- Datumtraktado kaj vidigado\n- Verkado de edukaj artikoloj"
+    }
+  },
+  "disneyland": {
+    "category": "work",
+    "start": 2024,
+    "end": 2025,
+    "icon": "",
+    "logo": "",
+    "sortOrder": 1,
+    "translations": {
+      "en": { "title": "Guest Support Agent, Disability Assistance (CDD) @ Disneyland Paris" },
+      "fr": { "title": "Agent·e polyvalent·e, service d'assistance aux personnes handicapées (CDD) @ Disneyland Paris" },
+      "zh": { "title": "残障旅客服务专员（定期合同）@ 巴黎迪士尼乐园" },
+      "eo": { "title": "Ĝenerala agento, asistado por handikapuloj (CDD) @ Disneyland Parizo" }
+    },
+    "body": {
+      "en": "- Accompanying visitors with disabilities",
+      "fr": "- Accompagnement des visiteurs et visiteuses en situation de handicap",
+      "zh": "- 为残障游客提供陪同服务",
+      "eo": "- Akompano de vizitantoj kun handikapoj"
+    }
+  },
+  "beijing-open-university": {
+    "category": "work",
+    "start": 2023,
+    "end": 2023,
+    "icon": "",
+    "logo": "",
+    "sortOrder": 3,
+    "translations": {
+      "en": { "title": "Assistant Coordinator, International Pedagogy (CDD) @ Beijing Open University" },
+      "fr": { "title": "Coordinateur·ice-adjoint·e, Pédagogie internationale (CDD) @ l'Université ouverte de Pékin" },
+      "zh": { "title": "国际教学助理协调员（定期合同）@ 北京开放大学" },
+      "eo": { "title": "Helpa Kunordiganto, Internacia Pedagogio (CDD) @ Pekina Malferma Universitato" }
+    },
+    "body": {
+      "en": "- Supporting international staff with administrative procedures\n- Preparing and translating teaching resources (French/English → Mandarin Chinese)",
+      "fr": "- Accompagnement des personnels internationaux dans les démarches administratives\n- Préparation et traduction des ressources d'enseignement (français/anglais → chinois mandarin)",
+      "zh": "- 协助国际人员办理行政手续\n- 准备和翻译教学资源（法语/英语 → 汉语普通话）",
+      "eo": "- Subteno de internaciaj kunlaborantoj en administraj procedoj\n- Preparado kaj tradukado de instruaj rimedoj (franca/angla → mandarena ĉina)"
+    }
+  },
+  "sciences-ingenieur-l1": {
+    "category": "education",
+    "start": 2026,
+    "end": 2028,
+    "icon": "",
+    "logo": "",
+    "sortOrder": 4,
+    "translations": {
+      "en": { "title": "Science for Engineering (L1 completed) @ Univ-Lorraine" },
+      "fr": { "title": "Science pour l'ingénieur (L1 validée) @ Univ-Lorraine" },
+      "zh": { "title": "工程科学学士第一年 @ 洛林大学" },
+      "eo": { "title": "Scienco por Inĝenieriko (L1 konfirmita) @ Univ-Lorraine" }
+    },
+    "body": {
+      "en": "",
+      "fr": "",
+      "zh": "",
+      "eo": ""
     }
   }
 }
