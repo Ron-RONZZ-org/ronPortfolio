@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titleKey="page_title_hi" title="About Me - Ron's Portfolio">
+  <header>
+    <h1 data-i18n="hi_title">Hi, I'm Ron</h1>
+    <p class="bio" data-i18n="hi_bio">
+      A bit more about who I am outside of work and study.
+    </p>
+  </header>
+
+  <main>
+    <div class="info-grid">
+      <div class="sidebar-block">
+        <h2 data-i18n="hi_interests">Interests</h2>
+        <ul>
+          <li>Hiking</li>
+          <li>Bike travel</li>
+          <li>Gardening</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-block">
+        <h2 data-i18n="hi_languages">Languages</h2>
+        <ul>
+          <li>Français — C2</li>
+          <li>English — C2</li>
+          <li>中文 — C2</li>
+          <li>Esperanto — A2</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <nav>
+    <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
+  </nav>
+</Base>

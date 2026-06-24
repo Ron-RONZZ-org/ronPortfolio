@@ -209,6 +209,15 @@ h1 {
 .filter-btn.select-all { background-color: #3d4f5c; }
 .filter-btn.deselect-all { background-color: #555; }
 
+/* Inactive category filter buttons (deselected) — greyed out */
+.filter-btn.education:not(.active),
+.filter-btn.work:not(.active),
+.filter-btn.achievement:not(.active),
+.filter-btn.personal:not(.active) {
+  opacity: 0.35;
+  filter: grayscale(0.8);
+}
+
 .timeline {
   position: relative;
   padding: 2rem 0;
@@ -297,8 +306,8 @@ h1 {
   margin-left: 1.5rem;
 }
 
-/* ── CV sidebar (skills / interests / languages) ──── */
-.cv-sidebar {
+/* ── Info grid (used by /hi page) ─────────────────── */
+.info-grid {
   max-width: var(--max-width);
   margin: 3rem auto 0;
   display: grid;
@@ -814,7 +823,7 @@ nav {
     font-size: 0.8rem;
     min-width: 45px;
   }
-  .cv-sidebar {
+  .info-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }

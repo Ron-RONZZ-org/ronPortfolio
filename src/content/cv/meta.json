@@ -82,6 +82,7 @@
   "ronzz-org": {
     "category": "personal",
     "start": 2024,
+    "end": 2024,
     "icon": "\u270D\uFE0F",
     "logo": "https://ronzz.org/content/images/2025/02/tp_Ronzz.org_logo.png",
     "sortOrder": 2,
@@ -127,7 +128,7 @@
     "sortOrder": 2,
     "translations": {
       "en": { "title": "Academic Board Member, voting @ UCL" },
-      "fr": { "title": "Membre du conseil académique, avec droit de vote @ UCL" },
+      "fr": { "title": "Conseiller d'Université @ UCL" },
       "zh": { "title": "UCL学术委员会成员" },
       "eo": { "title": "Akademia Estrarano, voĉdonanto @ UCL" }
     },
@@ -158,26 +159,6 @@
       "eo": "- Supra dua-klaso: averaĝe 60%\n- Specialiĝo en Geinformaj Sistemoj\n- Fakultata studenta reprezentanto"
     }
   },
-  "ucl-student-rep": {
-    "category": "work",
-    "start": 2023,
-    "end": 2024,
-    "icon": "",
-    "logo": "https://praxis.encommun.io/media/notes/note_11953/ucl.jpg",
-    "sortOrder": 1,
-    "translations": {
-      "en": { "title": "Student Representative for the Faculty of Engineering Science @ UCL" },
-      "fr": { "title": "Représentant étudiant pour la Faculté des sciences de l'ingénieur @ UCL" },
-      "zh": { "title": "UCL工程科学学院学生代表" },
-      "eo": { "title": "Studenta Reprezentanto por la Fakultato de Inĝenieriko @ UCL" }
-    },
-    "body": {
-      "en": "",
-      "fr": "",
-      "zh": "",
-      "eo": ""
-    }
-  },
   "uk-a-levels": {
     "category": "education",
     "start": 2023,
@@ -202,6 +183,7 @@
     "category": "work",
     "start": 2026,
     "icon": "",
+    "end": 2026,
     "logo": "",
     "sortOrder": 0,
     "translations": {

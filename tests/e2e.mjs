@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 
 const BASE = 'http://127.0.0.1:4322';
 const SUPPORTED_LANGS = ['en', 'fr', 'zh', 'eo'];
-const CV_SLUGS = 14;    // unique CV entry slugs
+const CV_SLUGS = 13;    // unique CV entry slugs
 const PORTFOLIO_SLUGS = 6; // unique portfolio entry slugs
 
 let passed = 0;
@@ -46,11 +46,12 @@ async function run() {
     assert(await page.locator('h1').textContent() === 'Ron', 'Shows "Ron" heading');
     assert(await page.locator('.profile-photo').count() === 1, 'Has profile photo');
     assert(await page.locator('.lang-btn').count() === SUPPORTED_LANGS.length, `Has ${SUPPORTED_LANGS.length} language toggle buttons`);
-    assert(await page.locator('.link-card').count() >= 6, 'Has 6+ link cards');
+    assert(await page.locator('.link-card').count() >= 7, 'Has 7+ link cards');
 
     // Check links go to correct paths
     const links = await page.locator('.link-card').all();
     const hrefs = await Promise.all(links.map(l => l.getAttribute('href')));
+    assert(hrefs.includes('/hi'), 'Has link to /hi');
     assert(hrefs.includes('/cv'), 'Has link to /cv');
     assert(hrefs.includes('/contact'), 'Has link to /contact');
     assert(hrefs.includes('/portfolio'), 'Has link to /portfolio');
