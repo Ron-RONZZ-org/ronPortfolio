@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="404 - Not Found">
+<Base titleKey="page_title_404" title="404 - Not Found - Ron's Portfolio">
   <div class="lang-picker">
     <h1>404</h1>
-    <p>Page not found.</p>
+    <p data-i18n="error_404_message">Page not found.</p>
     <nav>
-      <a href="/" class="back-link">← Go Home</a>
+      <a href="/" class="back-link" data-i18n="back_to_home">← Back to Home</a>
     </nav>
   </div>
 </Base>
