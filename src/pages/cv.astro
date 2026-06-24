@@ -84,9 +84,11 @@ for (const lang of langs) {
     {
       rendered.map(({ entry, Content }) => {
         const icon = entry.data.icon ?? '';
-        const period = entry.data.end
-          ? `${entry.data.start} – ${entry.data.end}`
-          : `${entry.data.start} – Present`;
+        const period = !entry.data.end
+          ? `${entry.data.start} – Present`
+          : entry.data.end === entry.data.start
+            ? `${entry.data.start}`
+            : `${entry.data.start} – ${entry.data.end}`;
 
         return (
           <div
