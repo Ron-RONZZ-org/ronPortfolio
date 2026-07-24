@@ -273,7 +273,7 @@ async function run() {
     const resp = await page.goto(`${BASE}/does-not-exist/`, { waitUntil: 'networkidle' });
     assert(resp?.status() === 404, 'Returns 404 status for unknown page');
     assert(await page.locator('h1').textContent() === '404', '404 heading');
-    assert(await page.locator('text=Go Home').count() === 1, 'Has Go Home link');
+    assert(await page.locator('text=Back to Home').count() === 1, 'Has Back to Home link');
 
     await ctx.close();
   }

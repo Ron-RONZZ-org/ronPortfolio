@@ -183,7 +183,6 @@
     "category": "work",
     "start": 2026,
     "icon": "",
-    "end": 2026,
     "logo": "",
     "sortOrder": 0,
     "translations": {
@@ -193,10 +192,10 @@
       "eo": { "title": "Fondinto de France-stat.org" }
     },
     "body": {
-      "en": "- Data processing and visualization\n- Writing educational articles",
-      "fr": "- Traitement et visualisation des données\n- Rédaction d'articles éducatifs",
-      "zh": "- 数据处理和可视化\n- 撰写教育类文章",
-      "eo": "- Datumtraktado kaj vidigado\n- Verkado de edukaj artikoloj"
+      "en": "- An online center for the big history of France",
+      "fr": "- Une Grande Histoire de la France, chiffrée et illustrée",
+      "zh": "- 一部图文并茂的法国大史",
+      "eo": "- Granda Historio de Francio"
     }
   },
   "disneyland": {

@@ -84,11 +84,6 @@ for (const lang of langs) {
     {
       rendered.map(({ entry, Content }) => {
         const icon = entry.data.icon ?? '';
-        const period = !entry.data.end
-          ? `${entry.data.start} – Present`
-          : entry.data.end === entry.data.start
-            ? `${entry.data.start}`
-            : `${entry.data.start} – ${entry.data.end}`;
 
         return (
           <div
@@ -98,7 +93,16 @@ for (const lang of langs) {
           >
             <div class="milestone-marker"></div>
             <div class="milestone-content">
-              <div class="milestone-time">{period}</div>
+              <div class="milestone-time">
+              {entry.data.start}
+              {!entry.data.end ? (
+                <> – <span data-i18n="cv_present">Present</span></>
+              ) : entry.data.end === entry.data.start ? (
+                ''
+              ) : (
+                ` – ${entry.data.end}`
+              )}
+            </div>
               <h3 class="milestone-title">
                 {icon ? `${icon} ` : ''}{entry.data.title}
               </h3>
